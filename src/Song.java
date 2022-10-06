@@ -24,4 +24,12 @@ public class Song
 		this.url = url;
 		this.artists = artists;
 	}
+	
+	public String toString()
+	{
+		return "Song title: " + title + " | " +
+				"Rank:  " + rank + " | " +
+				"Url: " + url + " | " +
+				"Artists: " + artists;
+	}
 }

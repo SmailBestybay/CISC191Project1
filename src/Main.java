@@ -16,8 +16,12 @@ public class Main
 	{
 		//
 		// TODO Open CSV file and print first row.
-		searchCSV(10);
-
+//		searchCSV(10);
+		
+		String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
+		
+		Song song = createSong(row);
+		System.out.println(song);
 	}
 	
 	public static String searchCSV(int row)
@@ -66,6 +70,26 @@ public class Main
 			colSc.close();
 		}
 		return "No results";
+	}
+	
+	/**
+	 * Parse row into a Song object
+	 * 
+	 * @param row
+	 * @return Song object
+	 */
+	public static Song createSong(String row)
+	{
+		Scanner sc = new Scanner(row);
+		sc.useDelimiter(",");
+		
+		String title = sc.next();
+		int rank = sc.nextInt();
+		String url = sc.next();
+		String artists = sc.next() + " " + sc.next();
+		
+		sc.close();
+		return new Song(title, rank, url, artists);
 	}
 
 }
