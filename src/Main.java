@@ -1,6 +1,11 @@
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.Scanner;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 /**
  * @author Smail, Dre
@@ -11,69 +16,71 @@ public class Main
 
 	/**
 	 * @param args
+	 *  
 	 */
 	public static void main(String[] args)
 	{
-		//
-		// TODO Open CSV file and print first row.
-//		searchCSV(10);
 		
-		String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
+//		String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
 		
-		Song song = createSong(row);
-		System.out.println(song);
+		Song[] songs = createSongs();
+		for(Song song: songs)
+		{
+			System.out.println(song);
+		}
+		
+		
 	}
 	
-	public static String searchCSV(int row)
+	/**
+	 * parses csv database file and returns songs array.
+	 * @return
+	 */
+	public static Song[] createSongs()
 	{
-		File inFile = new File ( "top200GlobalCharts.csv" );
-		
-		
-		Scanner rowSc = null;
-		Scanner colSc = null;
+		Song[] songs = new Song[201];
+		Reader inFile;
+		int count = 0;
 		try
 		{
-			rowSc = new Scanner (inFile);
-			int count = 0;
-			while (rowSc.hasNextLine() && count <= row)
-			{
-				String line = rowSc.nextLine();
+			inFile = new FileReader( "dataBase.csv" );
+			Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(inFile);
+			for (CSVRecord record : records) {
 				
-				// search line
-				// https://www.youtube.com/watch?v=1AyhR5A6ln4&t=231s&ab_channel=DevNami
-				// gonna need to use delimiter
-				
-				if (count == row)
-				{
-					System.out.println(line);
-					colSc = new Scanner(line);
-					colSc.useDelimiter(",");
-					while (colSc.hasNext())
-					{
-						line = colSc.next();
-						if(line.contains("I Feel It Coming")) {
-							System.out.println(line);
-							return line;
-						}
-					}
-				}
-				count++;
+//			    String title = record.get("title");
+//			    System.out.print(title + " | ");
+//			    String rank = record.get("rank");
+//			    System.out.print(rank + " | ");
+//			    String url = record.get("url");
+//			    System.out.print(url + " | ");
+//			    String artist = record.get("artist");
+//			    System.out.print(artist + " | ");
+//			    System.out.println();
+			    
+			    songs[count] = new Song(
+			    					record.get("title"),
+			    					record.get("rank"),
+			    					record.get("url"),
+			    					record.get("artist")
+			    					);
+			    count++;
 			}
 		}
 		catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
 		}
-		finally 
+		catch (IOException e)
 		{
-			rowSc.close();
-			colSc.close();
+			e.printStackTrace();
 		}
-		return "No results";
+		return songs;
 	}
 	
 	/**
 	 * Parse row into a Song object
+	 * 
+	 * TODO some song titles have a comma.
 	 * 
 	 * @param row
 	 * @return Song object
@@ -84,9 +91,9 @@ public class Main
 		sc.useDelimiter(",");
 		
 		String title = sc.next();
-		int rank = sc.nextInt();
+		String rank = sc.next();
 		String url = sc.next();
-		String artists = sc.next() + " " + sc.next();
+		String artists = sc.nextLine();
 		
 		sc.close();
 		return new Song(title, rank, url, artists);
