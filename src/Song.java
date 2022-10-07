@@ -9,7 +9,7 @@
 public class Song
 {
 	private String title;
-	private int rank;
+	private String rank;
 	// maybe this could be url class?
 	private String url;
 	// Artists field is string temporary
@@ -17,7 +17,7 @@ public class Song
 	
 	public Song() {};
 	
-	public Song(String title, int rank, String url, String artists)
+	public Song(String title, String rank, String url, String artists)
 	{
 		this.title = title;
 		this.rank = rank;
