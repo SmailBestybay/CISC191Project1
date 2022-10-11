@@ -21,6 +21,6 @@ public class Main
 		
 		ArrayList<Song> res = db.searchSong("Starboy");
 //		user.addSong(res.get(0)); 
-		System.out.println(user.addSong(null));
+		System.out.println(user.removeSong(null));
 	}
 }

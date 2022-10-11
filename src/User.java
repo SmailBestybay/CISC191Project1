@@ -29,6 +29,25 @@ public class User extends Person
 		return "Song has been added";
 	}
 	
+	public String removeSong(Song newSong)
+	{
+		// check if song already exists
+		if(newSong == null)
+		{
+			return "ERROR: No Song removed, object is null";
+		}
+		
+		for(Song song: songs)
+		{
+			if(song.equals(newSong))
+			{
+				songs.remove(song);
+				return "Song has been removed";
+			}
+		}
+		return "Song is not in the list";
+	}
+	
 	
 
 }
