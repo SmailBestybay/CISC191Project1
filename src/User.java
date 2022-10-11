@@ -10,6 +10,11 @@ public class User extends Person
 		super(name);
 	}
 	
+	/**
+	 * 
+	 * @param newSong
+	 * @return string status message
+	 */
 	public String addSong(Song newSong)
 	{
 		// check if song already exists
@@ -29,6 +34,11 @@ public class User extends Person
 		return "Song has been added";
 	}
 	
+	/**
+	 * 
+	 * @param newSong
+	 * @return string status message
+	 */
 	public String removeSong(Song newSong)
 	{
 		// check if song already exists
@@ -48,6 +58,52 @@ public class User extends Person
 		return "Song is not in the list";
 	}
 	
+	/**
+	 * 
+	 * @param newArtist
+	 * @return string status message
+	 */
+	public String addArtist(Artist newArtist)
+	{
+		// check if Artist already exists
+		if(newArtist == null)
+		{
+			return "ERROR: No Artist added, object is null";
+		}
+		
+		for(Artist Artist: artists)
+		{
+			if(Artist.equals(newArtist))
+			{
+				return "Artist is already here";
+			}
+		}
+		artists.add(newArtist);
+		return "Artist has been added";
+	}
 	
+	/**
+	 * 
+	 * @param newArtist
+	 * @return string status message
+	 */
+	public String removeArtist(Artist newArtist)
+	{
+		// check if Artist already exists
+		if(newArtist == null)
+		{
+			return "ERROR: No Artist removed, object is null";
+		}
+		
+		for(Artist artist: artists)
+		{
+			if(artist.equals(newArtist))
+			{
+				artists.remove(artist);
+				return "Artist has been removed";
+			}
+		}
+		return "Artist is not in the list";
+	}
 
 }
