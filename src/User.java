@@ -13,6 +13,11 @@ public class User extends Person
 	public String addSong(Song newSong)
 	{
 		// check if song already exists
+		if(newSong == null)
+		{
+			return "ERROR: No Song added, object is null";
+		}
+		
 		for(Song song: songs)
 		{
 			if(song.equals(newSong))
