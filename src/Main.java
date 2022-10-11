@@ -31,8 +31,7 @@ public class Main
 //		}
 //		String res = db.searchSong("ocean");
 //		String res = db.searchArtist("emin");
-		String res = db.search("Love");
-		System.out.println(res);
+		System.out.println(db.search("star"));
 	}
 	
 	

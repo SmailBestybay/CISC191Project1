@@ -132,7 +132,7 @@ public class Database
 	 * @param title
 	 * @return String of the result
 	 */
-	public String searchSong(String title)
+	public ArrayList<Song> searchSong(String title)
 	{
 		ArrayList<Song> foundSongs = new ArrayList<Song>();
 		for(Song song: songs)
@@ -145,21 +145,21 @@ public class Database
 		
 		if (foundSongs.size() == 0)
 		{
-			return "Song not found";
+			return null;
 		}
 		
-		StringBuilder result = new StringBuilder();
+//		StringBuilder result = new StringBuilder();
+//		
+//		for(Song song: foundSongs)
+//		{
+//			result.append(song.toString());
+//			result.append("\n");
+//		}
 		
-		for(Song song: foundSongs)
-		{
-			result.append(song.toString());
-			result.append("\n");
-		}
-		
-		return result.toString();
+		return foundSongs;
 	}
 	
-	public String searchArtist(String name)
+	public ArrayList<Artist> searchArtist(String name)
 	{
 		ArrayList<Artist> foundArtist = new ArrayList<Artist>();
 		for(Artist artist: artists)
@@ -172,29 +172,33 @@ public class Database
 		
 		if (foundArtist.size() == 0)
 		{
-			return "Artist not found";
+			return null;
 		}
 		
-		StringBuilder result = new StringBuilder();
+//		StringBuilder result = new StringBuilder();
+//		
+//		for(Artist artist: foundArtist)
+//		{
+//			result.append(artist.toString());
+//			result.append("\n");
+//		}
 		
-		for(Artist artist: foundArtist)
-		{
-			result.append(artist.toString());
-			result.append("\n");
-		}
-		
-		return result.toString();
+		return foundArtist;
 	}
 	
-	public String search(String entry)
+	public ArrayList<Object> search(String entry)
 	{
-		StringBuilder artistRes = new StringBuilder(this.searchArtist(entry));
-		StringBuilder songRes = new StringBuilder(this.searchSong(entry));
+		ArrayList<Artist> artistRes = this.searchArtist(entry);
+		ArrayList<Song> songRes = this.searchSong(entry);
 		
-		if(artistRes.toString().equals("Artist not found") && songRes.toString().equals("Song not found"))
+		if(artistRes == null && songRes == null)
 		{
-			return "No results";
+			return null;
 		}
-		return artistRes.toString() + "\n" + songRes.toString();
+		
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.addAll(artistRes);
+		result.addAll(songRes);
+		return result;
 	}
 }

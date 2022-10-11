@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Artist extends Person
 {
@@ -22,28 +21,4 @@ public class Artist extends Person
 				"Song count: " + songs.size();
 	}
 	
-	/**
-	 * @param Object other
-	 * @return boolean 
-	 */
-	@Override
-	public final boolean equals(Object other)
-	{
-		if(this == other)
-		{
-			return true;
-		}
-		
-		if(other == null)
-		{
-			return false;
-		}
-		
-		if(other instanceof Artist)
-		{
-			Artist artist = (Artist) other;
-			return Objects.equals(getName(), artist.getName());
-		}
-		return false;
-	}
 }

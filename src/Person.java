@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * 
  * @author Dre, Smail 
@@ -21,5 +23,30 @@ public class Person
 	public String getName()
 	{
 		return name;
+	}
+	
+	/**
+	 * @param Object other
+	 * @return boolean 
+	 */
+	@Override
+	public final boolean equals(Object other)
+	{
+		if(this == other)
+		{
+			return true;
+		}
+		
+		if(other == null)
+		{
+			return false;
+		}
+		
+		if(other instanceof Artist)
+		{
+			Person person = (Person) other;
+			return Objects.equals(getName(), person.getName());
+		}
+		return false;
 	}
 }
