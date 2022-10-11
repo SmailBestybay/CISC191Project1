@@ -30,7 +30,8 @@ public class Main
 //			System.out.println(artist);
 //		}
 //		String res = db.searchSong("ocean");
-		String res = db.searchArtist("");
+//		String res = db.searchArtist("emin");
+		String res = db.search("Love");
 		System.out.println(res);
 	}
 	

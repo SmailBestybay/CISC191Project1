@@ -185,4 +185,16 @@ public class Database
 		
 		return result.toString();
 	}
+	
+	public String search(String entry)
+	{
+		StringBuilder artistRes = new StringBuilder(this.searchArtist(entry));
+		StringBuilder songRes = new StringBuilder(this.searchSong(entry));
+		
+		if(artistRes.toString().equals("Artist not found") && songRes.toString().equals("Song not found"))
+		{
+			return "No results";
+		}
+		return artistRes.toString() + "\n" + songRes.toString();
+	}
 }
