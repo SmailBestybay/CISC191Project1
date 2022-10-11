@@ -25,14 +25,6 @@ public class Song
 		this.artists = artists;
 	}
 	
-	/**
-	 * @return the artists
-	 */
-	public ArrayList<Artist> getArtists()
-	{
-		return artists;
-	}
-	
 	public String toString()
 	{
 		return "Song title: " + title + " | " +
@@ -73,5 +65,31 @@ public class Song
 	public String getTitle()
 	{
 		return title;
+	}
+
+
+	/**
+	 * @return the rank
+	 */
+	public String getRank()
+	{
+		return rank;
+	}
+
+
+	/**
+	 * @return the url
+	 */
+	public String getUrl()
+	{
+		return url;
+	}
+	
+	/**
+	 * @return the artists
+	 */
+	public ArrayList<Artist> getArtists()
+	{
+		return artists;
 	}
 }

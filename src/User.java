@@ -1,3 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class User extends Person
@@ -104,6 +108,41 @@ public class User extends Person
 			}
 		}
 		return "Artist is not in the list";
+	}
+	
+	public void exportCSV()
+	{
+		try (
+				FileWriter fw = new FileWriter("Users/" + getName() + ".csv");
+				PrintWriter pw = new PrintWriter(fw);
+			)
+		{
+			
+			pw.println("title,rank,url,artists");
+			for(Song song: songs)
+			{
+				StringBuilder line = new StringBuilder();
+				line.append(song.getTitle()+",");
+				line.append(song.getRank()+",");
+				line.append(song.getUrl()+",");
+				line.append("\"");
+				line.append(song.getArtists().get(0).getName());
+				if(song.getArtists().size() > 1)
+				{
+					for(int i = 1; i < song.getArtists().size(); i++)
+					{
+						line.append(", "+song.getArtists().get(i).getName());
+					}
+				}
+				line.append("\"");
+				pw.println(line.toString());
+			}
+			
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }

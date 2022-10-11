@@ -19,8 +19,9 @@ public class Main
 		Database db = new Database("dataBase.csv");
 		User user = new User("Smile");
 		
-		ArrayList<Artist> res = db.searchArtist("The weeknd");
-//		user.addArtist(res.get(0)); 
-		System.out.println(user.removeArtist(res.get(0)));
+		ArrayList<Song> res = db.searchSong("Starboy");
+		user.addSong(res.get(0)); 
+//		System.out.println(user.removeArtist(res.get(0)));
+		user.exportCSV();
 	}
 }
