@@ -16,10 +16,19 @@ public class Main
 		
 		Database db = new Database("dataBase.csv");
 		
+//		for(int i = 0; i < db.getArtists().size(); i++)
+//		{
+//			System.out.println(db.getArtists().get(i));
+//		}
+		
 		for(Song song: db.getSongs())
 		{
 			System.out.println(song);
 		}
+//		for(Artist artist: db.getArtists())
+//		{
+//			System.out.println(artist);
+//		}
 		
 	}
 	
