@@ -21,15 +21,17 @@ public class Main
 //			System.out.println(db.getArtists().get(i));
 //		}
 		
-		for(Song song: db.getSongs())
-		{
-			System.out.println(song);
-		}
+//		for(Song song: db.getSongs())
+//		{
+//			System.out.println(song);
+//		}
 //		for(Artist artist: db.getArtists())
 //		{
 //			System.out.println(artist);
 //		}
-		
+//		String res = db.searchSong("ocean");
+		String res = db.searchArtist("");
+		System.out.println(res);
 	}
 	
 	

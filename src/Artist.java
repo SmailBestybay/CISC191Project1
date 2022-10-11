@@ -22,6 +22,11 @@ public class Artist extends Person
 				"Song count: " + songs.size();
 	}
 	
+	/**
+	 * @param Object other
+	 * @return boolean 
+	 */
+	@Override
 	public final boolean equals(Object other)
 	{
 		if(this == other)

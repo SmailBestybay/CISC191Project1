@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @author Smail Bestybay
@@ -40,5 +41,37 @@ public class Song
 				"Artists: " + artists;
 	}
 	
-	
+	/**
+	 * @param Object other
+	 * @return boolean 
+	 */
+	@Override
+	public final boolean equals(Object other)
+	{
+		if(this == other)
+		{
+			return true;
+		}
+		
+		if(other == null)
+		{
+			return false;
+		}
+		
+		if(other instanceof Song)
+		{
+			Song song = (Song) other;
+			return Objects.equals(rank, song.rank);
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @return song title
+	 */
+	public String getTitle()
+	{
+		return title;
+	}
 }

@@ -19,10 +19,6 @@ public class Database
 	@SuppressWarnings("deprecation")
 	public Database(String filename)
 	{
-		/**
-		 * parses csv database file and returns songs array.
-		 * @return array of songs
-		 */
 		songs = new Song[201];
 		Reader inFile;
 		int count = 0;
@@ -33,7 +29,6 @@ public class Database
 			for (CSVRecord record : records) {
 				// loop through artists cell to create artist with songs as null
 				ArrayList<Artist> songArtists = createArtists(record.get("artist"));
-				// add artist objects to song constructor
 			    songs[count] = new Song(
 			    					record.get("title"),
 			    					record.get("rank"),
@@ -42,9 +37,6 @@ public class Database
 			    					);
 			    count++;
 			}
-			
-			
-			// for every artist, loop through songs, if artist in song, add song to artist
 			addSongsToArtists();
 		}
 		catch (FileNotFoundException e)
@@ -56,10 +48,6 @@ public class Database
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-
 
 	/**
 	 * create artists and add them to db list 
@@ -73,37 +61,18 @@ public class Database
 		sc.useDelimiter(",");
 		while(sc.hasNext())
 		{
-			// need to check if artist already exists in the db before creating new artist.
-			// so we need addOrCreateArtist method
 			Artist artist = addOrCreateArtist(sc.next().trim());
-			
-//			
-//			Artist artist = new Artist(sc.next());
-//			// add unique artist to database list
-//			addArtistToDatabase(artist);
 			artistList.add(artist);
 		}
 		sc.close();
 		return artistList;
 	}
 	
-	private void addSongsToArtists()
-	{
-		// loop through all songs in db, add song to each artist
-		for(Song song: songs)
-		{
-			for(int i = 0; i < song.getArtists().size(); i++)
-			{
-				song.getArtists().get(i).addSong(song);
-			}
-		}
-	}
-	
-	public Song[] getSongs()
-	{
-		return songs;
-	}
-	
+	/**
+	 * Add or create then add artist to the database.
+	 * @param artistName
+	 * @return
+	 */
 	private static Artist addOrCreateArtist(String artistName)
 	{
 		Artist newArtist = null;
@@ -125,34 +94,95 @@ public class Database
 		artists.add(newArtist);
 		return newArtist;
 	}
+	
 	/**
-	 * compare given artist to database, add artist if no match
-	 * @param artist
+	 * add songs to each artist
 	 */
-	private static void addArtistToDatabase(Artist artist)
+	private void addSongsToArtists()
 	{
-		if(artists.size() == 0)
+		for(Song song: songs)
 		{
-			artists.add(artist);
-		}
-		boolean exists = false;
-		for(int i = 0; i < artists.size(); i++)
-		{
-			if(artists.get(i).equals(artist))
+			for(int i = 0; i < song.getArtists().size(); i++)
 			{
-				exists = true;
+				song.getArtists().get(i).addSong(song);
 			}
 		}
-		if(!exists)
-		{
-			artists.add(artist);
-		}
 	}
+	
 	/**
+	 * Will change to return a deep copy
+	 * @return 
+	 */
+	public Song[] getSongs()
+	{
+		return songs;
+	}
+	
+	/**
+	 * Will need to change to return a deep copy
 	 * @return the artists
 	 */
 	public ArrayList<Artist> getArtists()
 	{
 		return artists;
+	}
+	
+	/**
+	 * 
+	 * @param title
+	 * @return String of the result
+	 */
+	public String searchSong(String title)
+	{
+		ArrayList<Song> foundSongs = new ArrayList<Song>();
+		for(Song song: songs)
+		{
+			if(song.getTitle().toUpperCase().contains(title.toUpperCase()))
+			{
+				foundSongs.add(song);
+			}
+		}
+		
+		if (foundSongs.size() == 0)
+		{
+			return "Song not found";
+		}
+		
+		StringBuilder result = new StringBuilder();
+		
+		for(Song song: foundSongs)
+		{
+			result.append(song.toString());
+			result.append("\n");
+		}
+		
+		return result.toString();
+	}
+	
+	public String searchArtist(String name)
+	{
+		ArrayList<Artist> foundArtist = new ArrayList<Artist>();
+		for(Artist artist: artists)
+		{
+			if(artist.getName().toUpperCase().contains(name.toUpperCase()))
+			{
+				foundArtist.add(artist);
+			}
+		}
+		
+		if (foundArtist.size() == 0)
+		{
+			return "Artist not found";
+		}
+		
+		StringBuilder result = new StringBuilder();
+		
+		for(Artist artist: foundArtist)
+		{
+			result.append(artist.toString());
+			result.append("\n");
+		}
+		
+		return result.toString();
 	}
 }
