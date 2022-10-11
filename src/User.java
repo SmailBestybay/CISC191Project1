@@ -8,7 +8,22 @@ public class User extends Person
 	public User(String name)
 	{
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
+	
+	public String addSong(Song newSong)
+	{
+		// check if song already exists
+		for(Song song: songs)
+		{
+			if(song.equals(newSong))
+			{
+				return "Song is already here";
+			}
+		}
+		songs.add(newSong);
+		return "Song has been added";
+	}
+	
+	
 
 }
