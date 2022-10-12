@@ -26,7 +26,7 @@ public class Main
 		resArt = db.searchArtist("Daft Punk");
 		user.addArtist(resArt.get(0)); 
 //		System.out.println(user.removeArtist(res.get(0)));
-//		user.exportCSV();
+		user.exportCSV();
 		
 //		System.out.println(user.showArtists());
 //		System.out.println(user.showSongs());
