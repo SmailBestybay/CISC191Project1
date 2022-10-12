@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -117,19 +118,37 @@ public class User extends Person
 		return artists.toString();
 	}
 	
+	/**
+	 * 
+	 * @return songs string representation
+	 */
 	public String showSongs()
 	{
 		return songs.toString();
 	}
 	
+	public String showAllFavorites()
+	{
+		return "Favorite Songs:\n" + showSongs() + "\n" + "Favorite Artists:\n" + showArtists();
+	}
+	
+	/**
+	 * exports user's song and artist data into 2 csv file in a folder specific to user.
+	 */
 	public void exportCSV()
 	{
+		String path = "Users/" + getName() + "/";
+		File file = new File(path);
+		if(!file.isDirectory())
+		{
+			file.mkdirs();
+		}
 		try (
-				FileWriter fw = new FileWriter("Users/" + getName() + ".csv");
+				
+				FileWriter fw = new FileWriter(path + "songs.csv");
 				PrintWriter pw = new PrintWriter(fw);
 			)
 		{
-			
 			pw.println("title,rank,url,artists");
 			for(Song song: songs)
 			{
@@ -150,6 +169,7 @@ public class User extends Person
 				pw.println(line.toString());
 			}
 			
+			//TODO make artist.csv here
 		}
 		catch (IOException e)
 		{
