@@ -21,7 +21,14 @@ public class Main
 		
 		ArrayList<Song> res = db.searchSong("Starboy");
 		user.addSong(res.get(0)); 
+		ArrayList<Artist> resArt = db.searchArtist("The Weeknd");
+		user.addArtist(resArt.get(0)); 
+		resArt = db.searchArtist("Daft Punk");
+		user.addArtist(resArt.get(0)); 
 //		System.out.println(user.removeArtist(res.get(0)));
-		user.exportCSV();
+//		user.exportCSV();
+		
+		System.out.println(user.showArtists());
+		
 	}
 }

@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -108,6 +107,14 @@ public class User extends Person
 			}
 		}
 		return "Artist is not in the list";
+	}
+	
+	/**
+	 * @return artists string representation
+	 */
+	public String showArtists()
+	{
+		return artists.toString();
 	}
 	
 	public void exportCSV()
