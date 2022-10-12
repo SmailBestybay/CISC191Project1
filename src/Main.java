@@ -29,7 +29,7 @@ public class Main
 //		resArt = db.searchArtist("Daft Punk");
 //		user.addArtist(resArt.get(0)); 
 //		System.out.println(user.removeArtist(res.get(0)));
-		user.exportCSV();
+		userDatabase.exportCSV(user);
 		user = userDatabase.importUser("Smile");
 		System.out.println(user.showAllFavorites());
 	}
