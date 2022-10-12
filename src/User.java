@@ -139,10 +139,7 @@ public class User extends Person
 	{
 		String path = "Users/" + getName() + "/";
 		File file = new File(path);
-		if(!file.isDirectory())
-		{
-			file.mkdirs();
-		}
+		file.mkdirs();
 		try (
 				
 				FileWriter fw = new FileWriter(path + "songs.csv");
