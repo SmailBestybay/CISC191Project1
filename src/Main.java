@@ -28,9 +28,6 @@ public class Main
 //		System.out.println(user.removeArtist(res.get(0)));
 		user.exportCSV();
 		
-//		System.out.println(user.showArtists());
-//		System.out.println(user.showSongs());
-		System.out.println(user.showAllFavorites());
 		
 	}
 }
