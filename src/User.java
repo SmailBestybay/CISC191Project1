@@ -117,9 +117,18 @@ public class User extends Person
 		return artists.toString();
 	}
 	
+	/**
+	 * 
+	 * @return songs string representation
+	 */
 	public String showSongs()
 	{
 		return songs.toString();
+	}
+	
+	public String showAllFavorites()
+	{
+		return "Favorite Songs:\n" + showSongs() + "\n" + "Favorite Artists:\n" + showArtists();
 	}
 	
 	public void exportCSV()
