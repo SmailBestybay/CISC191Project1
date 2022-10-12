@@ -19,7 +19,7 @@ public class SpotifyDatabase
 	@SuppressWarnings("deprecation")
 	public SpotifyDatabase(String filename)
 	{
-		songs = new Song[201];
+		songs = new Song[200];
 		Reader inFile;
 		int count = 0;
 		try

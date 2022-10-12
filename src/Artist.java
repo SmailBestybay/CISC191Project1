@@ -21,4 +21,13 @@ public class Artist extends Person
 				"Song count: " + songs.size();
 	}
 	
+	public ArrayList<Song> getSongs()
+	{
+		ArrayList<Song> newSongs = new ArrayList<Song>();
+		for(Song song: songs)
+		{
+			newSongs.add(song);
+		}
+		return newSongs;
+	}
 }
