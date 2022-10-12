@@ -23,11 +23,11 @@ public class Main
 //		System.out.println(res);
 //		
 		user.addSong(res.get(0)); 
-//		ArrayList<Artist> resArt = db.searchArtist("drake");
+		ArrayList<Artist> resArt = db.searchArtist("drake");
 //		System.out.println(resArt);
-//		user.addArtist(resArt.get(0)); 
-//		resArt = db.searchArtist("Daft Punk");
-//		user.addArtist(resArt.get(0)); 
+		user.addArtist(resArt.get(0)); 
+		resArt = db.searchArtist("Daft Punk");
+		user.addArtist(resArt.get(0)); 
 //		System.out.println(user.removeArtist(res.get(0)));
 		userDatabase.exportCSV(user);
 		user = userDatabase.importUser("Smile");

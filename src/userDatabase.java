@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,10 +43,10 @@ public class userDatabase
 		try
 		{
 			inFile = new FileReader(path + "songs.csv");
-			Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(inFile);
+			Iterable<CSVRecord> songRecords = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(inFile);
 			// for every row read rank
 			Song[] dbsongs = SpotifyDatabase.getSongs();
-			for (CSVRecord record : records) 
+			for (CSVRecord record : songRecords) 
 			{
 				// use rank to find song object in SpotifyDB
 				for(int i = 0; i < dbsongs.length; i++)
@@ -69,13 +68,19 @@ public class userDatabase
 		// read artists.csv
 		try
 		{
-			inFile = new FileReader(path + "songs.csv");
-			Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(inFile);
+			inFile = new FileReader(path + "artists.csv");
+			Iterable<CSVRecord> artistRecords = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(inFile);
 			// for every row read songHash
-			ArrayList<Artist> dbartist = SpotifyDatabase.getArtists();
-			for (CSVRecord record : records) 
+			ArrayList<Artist> dbartists = SpotifyDatabase.getArtists();
+			for (CSVRecord record : artistRecords) 
 			{
-				
+				for(Artist artist: dbartists)
+				{
+					if(songHash(artist).equals(record.get("songs")))
+					{
+						user.addArtist(artist);
+					}
+				}
 			}
 		}
 		catch (IOException e)
@@ -199,9 +204,4 @@ public class userDatabase
 		}
 		return songHash.toString();
 	}
-	
-	
-	
-	
-	
 }
