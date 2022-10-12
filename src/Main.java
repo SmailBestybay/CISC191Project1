@@ -16,7 +16,7 @@ public class Main
 		
 //		String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
 		
-		Database db = new Database("dataBase.csv");
+		SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
 		User user = new User("Smile");
 		
 		ArrayList<Song> res = db.searchSong("Starboy");

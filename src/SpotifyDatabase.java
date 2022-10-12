@@ -8,7 +8,7 @@ import java.util.Scanner;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-public class Database
+public class SpotifyDatabase
 {
 	private static Song[] songs;
 	private static ArrayList<Artist> artists = new ArrayList<Artist>();
@@ -17,7 +17,7 @@ public class Database
 	 *  Constructor that initializes song and artist database
 	 */
 	@SuppressWarnings("deprecation")
-	public Database(String filename)
+	public SpotifyDatabase(String filename)
 	{
 		songs = new Song[201];
 		Reader inFile;
