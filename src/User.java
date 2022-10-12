@@ -117,6 +117,11 @@ public class User extends Person
 		return artists.toString();
 	}
 	
+	public String showSongs()
+	{
+		return songs.toString();
+	}
+	
 	public void exportCSV()
 	{
 		try (
