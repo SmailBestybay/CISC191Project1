@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * @author Smail, Dre
  *
@@ -15,27 +17,19 @@ public class Main
 //		String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
 		
 		Database db = new Database("dataBase.csv");
+		User user = new User("Smile");
 		
-//		for(int i = 0; i < db.getArtists().size(); i++)
-//		{
-//			System.out.println(db.getArtists().get(i));
-//		}
+		ArrayList<Song> res = db.searchSong("Starboy");
+		user.addSong(res.get(0)); 
+		ArrayList<Artist> resArt = db.searchArtist("The Weeknd");
+		user.addArtist(resArt.get(0)); 
+		resArt = db.searchArtist("Daft Punk");
+		user.addArtist(resArt.get(0)); 
+//		System.out.println(user.removeArtist(res.get(0)));
+//		user.exportCSV();
 		
-//		for(Song song: db.getSongs())
-//		{
-//			System.out.println(song);
-//		}
-//		for(Artist artist: db.getArtists())
-//		{
-//			System.out.println(artist);
-//		}
-//		String res = db.searchSong("ocean");
-//		String res = db.searchArtist("emin");
-		String res = db.search("Love");
-		System.out.println(res);
+//		System.out.println(user.showArtists());
+		System.out.println(user.showSongs());
+		
 	}
-	
-	
-	
-
 }
