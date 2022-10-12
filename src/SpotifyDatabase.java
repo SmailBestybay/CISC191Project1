@@ -113,7 +113,7 @@ public class SpotifyDatabase
 	 * Will change to return a deep copy
 	 * @return 
 	 */
-	public Song[] getSongs()
+	public static Song[] getSongs()
 	{
 		return songs;
 	}
@@ -122,7 +122,7 @@ public class SpotifyDatabase
 	 * Will need to change to return a deep copy
 	 * @return the artists
 	 */
-	public ArrayList<Artist> getArtists()
+	public static ArrayList<Artist> getArtists()
 	{
 		return artists;
 	}
