@@ -25,3 +25,7 @@ hs_err_pid*
 /target/
 target/
 target/classes/META-INF
+**/target/
+
+# inteliJ idea
+.idea/
