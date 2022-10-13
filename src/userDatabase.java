@@ -32,10 +32,20 @@ public class userDatabase
 		return res;
 	}
 	
+	/**
+	 * When gui wants to log in, will probably use this method
+	 * 
+	 * @param name
+	 * @return
+	 */
 	@SuppressWarnings("deprecation")
 	public static User importUser(String name)
 	{
 		String path = findUserPath(name);
+		if(path == null)
+		{
+			return null;
+		}
 		User user = new User(name);
 		
 		// read songs.csv
@@ -117,6 +127,7 @@ public class userDatabase
 	
 	
 	/**
+	 * Can use this to also "register" the user
 	 * exports user's song and artist data into 2 csv file in a folder specific to user.
 	 */
 	public static void exportCSV(User user)
