@@ -7,6 +7,7 @@ public class ConsoleGUI {
    
     /**
      * Welcome statement
+     * @throws InterruptedException interrupted exception
      */
     public static void greetings() throws InterruptedException
     {
