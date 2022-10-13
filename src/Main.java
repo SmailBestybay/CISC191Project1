@@ -17,7 +17,7 @@ public class Main
 //		String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
 		
 		SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
-		User user = userDatabase.importUser("Smile");
+		User user = userDatabase.importUser("Bae");
 //		
 		ArrayList<Song> res = db.searchSong("starboy");
 //		System.out.println(res);
@@ -30,7 +30,7 @@ public class Main
 		user.addArtist(resArt.get(0)); 
 //		System.out.println(user.removeArtist(res.get(0)));
 		userDatabase.exportCSV(user);
-		user = userDatabase.importUser("Smile");
+		user = userDatabase.importUser("Bae");
 		System.out.println(user.showAllFavorites());
 	}
 }
