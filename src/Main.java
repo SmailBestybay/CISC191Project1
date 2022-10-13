@@ -16,6 +16,7 @@ public class Main
 	{
 		try {
 			ConsoleGUI.greetings();
+			ConsoleGUI.promptToShowExistingUsers();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

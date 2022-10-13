@@ -31,7 +31,38 @@ public class ConsoleGUI {
         for(String message: messages)
         {
             System.out.print(message);
-            Thread.sleep(5000);
+            Thread.sleep(4500);
         }
+    }
+
+    public static boolean promptToShowExistingUsers()
+    {
+        Scanner keyboard = new Scanner(System.in);
+        boolean seeUsers = false;
+        while(!seeUsers)
+        {
+            System.out.print("Would you like to see existing users? (Y/N): ");
+            String response = keyboard.nextLine();
+            if(response.equals("Y") || response.equals("y"))
+            {
+                seeUsers = true;
+                keyboard.close();
+                return seeUsers;
+            } 
+            else if (response.equals("N") || response.equals("n"))
+            {
+                keyboard.close();
+                return seeUsers;
+            }
+            else 
+            {
+                System.out.println();
+                System.out.println("INVALID INPUT");
+                System.out.println("Your response was: " + response);
+                System.out.println();
+            }
+        }
+        keyboard.close();
+        return seeUsers;
     }
 }
