@@ -119,7 +119,6 @@ public class User extends Person
 	}
 	
 	/**
-	 * 
 	 * @return songs string representation
 	 */
 	public String showSongs()
@@ -131,94 +130,22 @@ public class User extends Person
 	{
 		return "Favorite Songs:\n" + showSongs() + "\n" + "Favorite Artists:\n" + showArtists();
 	}
-	
+
 	/**
-	 * exports user's song and artist data into 2 csv file in a folder specific to user.
-	 */
-	public void exportCSV()
-	{
-		String path = "Users/" + getName() + "/";
-		File file = new File(path);
-		file.mkdirs();
-		// export songs.csv
-		try (
-				
-				FileWriter fw = new FileWriter(path + "songs.csv");
-				PrintWriter pw = new PrintWriter(fw);
-			)
-		{
-			pw.println("title,rank,url,artists");
-			for(Song song: songs)
-			{
-				StringBuilder line = new StringBuilder();
-				line.append(song.getTitle()+",");
-				line.append(song.getRank()+",");
-				line.append(song.getUrl()+",");
-				// open quote for artist cell
-				line.append("\"");
-				line.append(song.getArtists().get(0).getName());
-				if(song.getArtists().size() > 1)
-				{
-					for(int i = 1; i < song.getArtists().size(); i++)
-					{
-						line.append(", "+song.getArtists().get(i).getName());
-					}
-				}
-				// close quote for artist cell
-				line.append("\"");
-				pw.println(line.toString());
-			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		
-		// export artist.csv
-		try (
-				FileWriter  afw = new FileWriter(path + "artists.csv");
-				PrintWriter apw = new PrintWriter(afw);
-			)
-		{
-			apw.println("name,songs");
-			for(Artist artist: artists)
-			{
-				StringBuilder aline = new StringBuilder();
-				aline.append(artist.getName()+",");
-				aline.append(songHash(artist));
-				apw.println(aline.toString());
-			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		
-	}
-	
-	/**
-	 * Helper function to converts artist's songs into a hash
-	 * hash format: song ranks separated by dashes " - " 
-	 * @param artist
+	 * modify to return deep copy later
 	 * @return
 	 */
-	private static String songHash(Artist artist)
+	public ArrayList<Song> getSongs()
 	{
-		if(artist == null) {return "Artist object is null";}
-		
-		StringBuilder songHash = new StringBuilder();
-		for(int i = 0; i < artist.getSongs().size(); i++)
-		{
-			if(i == artist.getSongs().size()-1)
-			{
-				songHash.append(artist.getSongs().get(i).getRank());
-			} else {
-				songHash.append(artist.getSongs().get(i).getRank());
-				songHash.append("-");
-			}
-			
-		}
-		return songHash.toString();
+		return songs;
 	}
 
+	/**
+	 * modify to return deep copy later
+	 * @return
+	 */
+	public ArrayList<Artist> getArtists()
+	{
+		return artists;
+	}
 }
