@@ -9,7 +9,6 @@ public class Main
 
 	/**
 	 * Controller
-	 * @param args
 	 *  
 	 */
 	public static void main(String[] args)
