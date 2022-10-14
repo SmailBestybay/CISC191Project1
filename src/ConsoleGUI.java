@@ -38,8 +38,12 @@ public class ConsoleGUI {
 
         for(String message: messages)
         {
-            System.out.print(message);
-            Thread.sleep(4500);
+            for(int i = 0; i < message.length(); i++)
+            {
+                System.out.print(message.charAt(i));
+                Thread.sleep(10);
+            }
+            Thread.sleep(1500);
         }
     }
 
