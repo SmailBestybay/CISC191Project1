@@ -47,6 +47,10 @@ public class ConsoleGUI {
         }
     }
 
+    /**
+     * Ask if user wants to see existing users
+     * @return boolean user's choice
+     */
     public static boolean promptToShowExistingUsers()
     {
         Scanner keyboard = new Scanner(System.in);
@@ -72,5 +76,14 @@ public class ConsoleGUI {
                 System.out.println();
             }
         }
+    }
+
+    /**
+     * Show existing users
+     */
+    public static void ShowExistingUsers()
+    {
+        System.out.println("These are the existing users:");
+        System.out.println(userDatabase.showUsers());
     }
 }

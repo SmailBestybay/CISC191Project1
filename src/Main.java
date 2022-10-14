@@ -15,7 +15,10 @@ public class Main
 	{
 		try {
 			ConsoleGUI.greetings();
-			ConsoleGUI.promptToShowExistingUsers();
+			if(ConsoleGUI.promptToShowExistingUsers())
+			{
+				ConsoleGUI.ShowExistingUsers();
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

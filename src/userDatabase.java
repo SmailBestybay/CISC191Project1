@@ -27,7 +27,7 @@ public class userDatabase
 		String res = "";
 		for(String str: list)
 		{
-			res += str + " ";
+			res += str + "    ";
 		}
 		return res;
 	}
