@@ -83,7 +83,10 @@ public class ConsoleGUI {
      */
     public static void ShowExistingUsers()
     {
-        System.out.println("These are the existing users:");
-        System.out.println(userDatabase.showUsers());
+        System.out.println("Here are the existing users:");
+        for(String user: userDatabase.showUsers())
+        {
+            System.out.println(user);
+        }
     }
 }
