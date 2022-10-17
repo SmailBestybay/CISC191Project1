@@ -166,4 +166,14 @@ public class ConsoleGUI {
         }
         return user;
     }
+
+    public static String standByMode()
+    {
+        return keyboard.nextLine();
+    }
+
+    public static void listCommands()
+    {
+
+    }
 }
