@@ -4,6 +4,8 @@ import java.util.Scanner;
  * View
  */
 public class ConsoleGUI {
+    // scanner needs to be static so that we do not close it multiple times
+    // closing scanner closes System.in, for all other methods.
     private static final Scanner keyboard = new Scanner(System.in);
    
     /**
@@ -124,5 +126,25 @@ public class ConsoleGUI {
                 return user;
             }
         }
+    }
+
+    /**
+     *
+     * @return String name of successfully registered username
+     */
+    public static String register()
+    {
+        System.out.println("---------------------------------------------------------");
+        System.out.print("Please enter user name to register: ");
+        String name = keyboard.next();
+        if(keyboard.hasNext())
+        {
+            keyboard.nextLine();
+        }
+        // validate name input to be one word
+        System.out.println("-------------------NAME IN REGISTER-------------------");
+        System.out.println(name);
+        System.out.println("-------------------NAME IN REGISTER-------------------");
+        return "";
     }
 }

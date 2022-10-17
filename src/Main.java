@@ -11,20 +11,21 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		 SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
-
+		SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
+		User user = null;
 		try {
 			ConsoleGUI.greetings();
 			if(ConsoleGUI.promptToShowExistingUsers())
 			{
 				ConsoleGUI.showExistingUsers();
-				User user = ConsoleGUI.login();
+			}
+			while(user == null)
+			{
+				user = ConsoleGUI.login();
 				if (user == null)
 				{
 					// register user
-					System.out.println("Register here");
-				} else {
-					System.out.println(user);
+					ConsoleGUI.register();
 				}
 			}
 		} catch (InterruptedException e) {
