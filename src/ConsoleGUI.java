@@ -4,6 +4,7 @@ import java.util.Scanner;
  * View
  */
 public class ConsoleGUI {
+    private static final Scanner keyboard = new Scanner(System.in);
    
     /**
      * Welcome statement
@@ -41,9 +42,9 @@ public class ConsoleGUI {
             for(int i = 0; i < message.length(); i++)
             {
                 System.out.print(message.charAt(i));
-                Thread.sleep(10);
+//                Thread.sleep(10);
             }
-            Thread.sleep(1500);
+//            Thread.sleep(1500);
         }
     }
 
@@ -53,19 +54,16 @@ public class ConsoleGUI {
      */
     public static boolean promptToShowExistingUsers()
     {
-        Scanner keyboard = new Scanner(System.in);
         while(true)
         {
             System.out.print("Would you like to see existing users? (Y/N): ");
             String response = keyboard.nextLine();
             if(response.equals("Y") || response.equals("y"))
             {
-                keyboard.close();
                 return true;
             } 
             else if (response.equals("N") || response.equals("n"))
             {
-                keyboard.close();
                 return false;
             }
             else 
@@ -81,12 +79,50 @@ public class ConsoleGUI {
     /**
      * Show existing users
      */
-    public static void ShowExistingUsers()
+    public static void showExistingUsers()
     {
+        System.out.println("---------------------------------------------------------");
         System.out.println("Here are the existing users:");
         for(String user: userDatabase.showUsers())
         {
             System.out.println(user);
+        }
+        System.out.println("---------------------------------------------------------");
+    }
+
+    /**
+     *
+     * @return user that exists in database or null
+     */
+    public static User login()
+    {
+        while (true) {
+            System.out.println("---------------------------------------------------------");
+            System.out.print("Please enter user name to login: ");
+            String name = keyboard.nextLine();
+            User user = userDatabase.importUser(name);
+            if (user == null) {
+                System.out.println();
+                System.out.println("User does not exist");
+                System.out.println("Format is a one word name that starts with a capital letter");
+                boolean register = true;
+                while (register) {
+                    System.out.print("Would you like to register a new user instead? (Y/N): ");
+                    String response = keyboard.nextLine();
+                    if (response.equals("Y") || response.equals("y")) {
+                        return null;
+                    } else if (response.equals("N") || response.equals("n")) {
+                        register = false;
+                    } else {
+                        System.out.println();
+                        System.out.println("INVALID INPUT");
+                        System.out.println("Your response was: " + response);
+                        System.out.println();
+                    }
+                }
+            } else {
+                return user;
+            }
         }
     }
 }

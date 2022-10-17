@@ -18,7 +18,7 @@ public class userDatabase
 {
 	/**
 	 * display all existing users by reading sub folder names
-	 * @return
+	 * @return list of users
 	 */
 	public static String[] showUsers()
 	{
@@ -29,8 +29,8 @@ public class userDatabase
 	/**
 	 * When gui wants to log in, will probably use this method
 	 * 
-	 * @param name
-	 * @return
+	 * @param name name of user
+	 * @return User object
 	 */
 	@SuppressWarnings("deprecation")
 	public static User importUser(String name)
@@ -53,7 +53,7 @@ public class userDatabase
 			for (CSVRecord record : songRecords) 
 			{
 				// use rank to find song object in SpotifyDB
-				for(int i = 0; i < dbsongs.length; i++)
+				for (int i = 0; i < dbsongs.length; i++)
 				{
 					if(dbsongs[i].getRank().equals(record.get("rank")))
 					{
@@ -98,8 +98,8 @@ public class userDatabase
 	/**
 	 * Finds path to user data in folder structure
 	 * should add throw null exception in the future
-	 * @param name
-	 * @return
+	 * @param name name of user
+	 * @return path to user
 	 */
 	private static String findUserPath(String name)
 	{
@@ -188,8 +188,8 @@ public class userDatabase
 	/**
 	 * Helper function to converts artist's songs into a hash
 	 * hash format: song ranks separated by dashes " - " 
-	 * @param artist
-	 * @return
+	 * @param artist artist to hash
+	 * @return song hash number in string type
 	 */
 	private static String songHash(Artist artist)
 	{

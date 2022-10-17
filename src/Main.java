@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * @author Smail, Dre
  *
@@ -13,11 +11,21 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
+		 SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
+
 		try {
 			ConsoleGUI.greetings();
 			if(ConsoleGUI.promptToShowExistingUsers())
 			{
-				ConsoleGUI.ShowExistingUsers();
+				ConsoleGUI.showExistingUsers();
+				User user = ConsoleGUI.login();
+				if (user == null)
+				{
+					// register user
+					System.out.println("Register here");
+				} else {
+					System.out.println(user);
+				}
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -25,7 +33,7 @@ public class Main
 		
 		// String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
 		
-		// SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
+
 		// User user = userDatabase.importUser("Bae");
 		// ArrayList<Song> res = db.searchSong("starboy");
 		// System.out.println(res);
