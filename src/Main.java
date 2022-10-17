@@ -25,9 +25,11 @@ public class Main
 				if (user == null)
 				{
 					// register user
-					ConsoleGUI.register();
+					user = ConsoleGUI.register();
 				}
 			}
+			System.out.println("Logged in user: ");
+			System.out.println(user.getName());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

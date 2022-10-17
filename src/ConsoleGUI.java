@@ -106,7 +106,7 @@ public class ConsoleGUI {
             if (user == null) {
                 System.out.println();
                 System.out.println("User does not exist");
-                System.out.println("Format is a one word name that starts with a capital letter");
+                System.out.println("Format for username is a one word name");
                 boolean register = true;
                 while (register) {
                     System.out.print("Would you like to register a new user instead? (Y/N): ");
@@ -132,19 +132,38 @@ public class ConsoleGUI {
      *
      * @return String name of successfully registered username
      */
-    public static String register()
+    public static User register()
     {
-        System.out.println("---------------------------------------------------------");
-        System.out.print("Please enter user name to register: ");
-        String name = keyboard.next();
-        if(keyboard.hasNext())
+        User user = null;
+        while (user == null)
         {
-            keyboard.nextLine();
+            System.out.println("---------------------------------------------------------");
+            System.out.println("Type exit to exit registration");
+            System.out.println("Please enter user name to register: ");
+            String name = keyboard.nextLine();
+            // validate name input to be one word
+            String[] arr = name.trim().split(" ");
+
+            if(arr.length == 1)
+            {
+                if(name.equals("exit"))
+                {
+                    System.out.println("Exited registration");
+                    System.out.println("---------------------------------------------------------");
+                    return null;
+                }
+                else if(name.equals(""))
+                {
+                    System.out.println("ERROR: Username cannot be empty");
+                } else {
+                    user = new User(name);
+                    userDatabase.exportCSV(user);
+                }
+            }
+           else {
+                System.out.println("ERROR: Username must be only one word.");
+            }
         }
-        // validate name input to be one word
-        System.out.println("-------------------NAME IN REGISTER-------------------");
-        System.out.println(name);
-        System.out.println("-------------------NAME IN REGISTER-------------------");
-        return "";
+        return user;
     }
 }
