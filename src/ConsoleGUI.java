@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -197,14 +198,63 @@ public class ConsoleGUI {
         System.out.println("Search mode entered:");
         System.out.println("Search by Artist or Song or Mixed? (A/S/M):" );
         String category = keyboard.nextLine();
-        if (category.equals("A") || category.equals("a")) {
-            return "artist";
-        } else if (category.equals("S") || category.equals("s")) {
-            return "song";
-        } else if (category.equals("M") || category.equals("m")) {
-            return "mixed";
-        } else {
-            return "error";
+        return switch (category) {
+            case "A", "a" -> "artist";
+            case "S", "s" -> "song";
+            case "M", "m" -> "mixed";
+            default -> "error";
+        };
+    }
+
+    public static String searchByArtists() {
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Please enter your search query:");
+        return keyboard.nextLine();
+    }
+
+    public static void searchBySong() {
+    }
+
+    public static void search() {
+    }
+
+    public static Artist displayArtistResults(ArrayList<Artist> artists)
+    {
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Artist search results: ");
+        if (artists == null)
+        {
+            System.out.println("No Artists Found.");
+            return null;
         }
+
+        for (int i = 0; i < artists.size(); i++) {
+            System.out.println("--> " + i + " <--");
+            System.out.println(artists.get(i));
+        }
+        int index = -1;
+        while(index == -1)
+        {
+            System.out.println("Pick the artist to add to you favorites list");
+            if(keyboard.hasNextInt())
+            {
+                index = keyboard.nextInt();
+
+                if(index < 0)
+                {
+                    index = -1;
+                    System.out.println("Number can not be negative");
+                }
+            } else {
+                System.out.println("Error: please enter the number");
+                keyboard.nextLine();
+            }
+        }
+        return artists.get(index);
+    }
+
+    public static void displaySongResults(ArrayList<Song> songs)
+    {
+
     }
 }

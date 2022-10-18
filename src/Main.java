@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * @author Smail, Dre
  *
@@ -38,7 +40,8 @@ public class Main
 						System.out.print(user.getName() + "\n");
 
 						// Listen to commands from user.
-						System.out.println("Standing by for a command:");
+						System.out.println("Standing by for a command...");
+						System.out.println("Enter \"help\" for list of available commands");
 						String command = ConsoleGUI.standByMode();
 
 						/////////////////// if statement for every command ///////////////////
@@ -48,10 +51,19 @@ public class Main
 							case "error" -> System.out.println("ERROR: command must be only one word.");
 							case "logout" -> user = null;
 							case "search" -> {
-								String method = ConsoleGUI.searchMethod();
-								if(method.equals("error"))
-								{
-									System.out.println("ERROR: search method undefined");
+								switch (ConsoleGUI.searchMethod()) {
+									case "error" -> System.out.println("ERROR: search method undefined");
+									case "artist" -> {
+										ArrayList<Artist> artists = db.searchArtist(ConsoleGUI.searchByArtists());
+										ConsoleGUI.displayArtistResults(artists);
+
+									}
+									case "songs" -> {
+										ConsoleGUI.searchBySong();
+									}
+									case "mixed" -> {
+										ConsoleGUI.search();
+									}
 								}
 							}
 							case "shutdown" -> System.exit(0);
