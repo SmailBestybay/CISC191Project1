@@ -167,13 +167,44 @@ public class ConsoleGUI {
         return user;
     }
 
+    /**
+     * Listens to commands from the user
+     * @return one word command
+     */
     public static String standByMode()
     {
-        return keyboard.nextLine();
+        String command = keyboard.nextLine();
+        String[] arr = command.trim().split(" ");
+        if(arr.length == 1)
+        {
+            return command;
+        } else {
+            return "error";
+        }
     }
 
+    /**
+     * List all commands available to the user
+     */
     public static void listCommands()
     {
+        System.out.println("LIST OF COMMANDS");
+    }
 
+    public static String searchMethod()
+    {
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Search mode entered:");
+        System.out.println("Search by Artist or Song or Mixed? (A/S/M):" );
+        String category = keyboard.nextLine();
+        if (category.equals("A") || category.equals("a")) {
+            return "artist";
+        } else if (category.equals("S") || category.equals("s")) {
+            return "song";
+        } else if (category.equals("M") || category.equals("m")) {
+            return "mixed";
+        } else {
+            return "error";
+        }
     }
 }

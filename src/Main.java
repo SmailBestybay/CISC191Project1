@@ -33,27 +33,29 @@ public class Main
 					// Enter standby mode:
 					while(user != null)
 					{
-						System.out.println("Logged in user: ");
-						System.out.println(user.getName());
+						System.out.println("---------------------------------------------------------");
+						System.out.print("Current User: ");
+						System.out.print(user.getName() + "\n");
 
 						// Listen to commands from user.
+						System.out.println("Standing by for a command:");
 						String command = ConsoleGUI.standByMode();
 
 						/////////////////// if statement for every command ///////////////////
 
-						if(command.equals("logout"))
-						{
-							user = null;
-						}
-
-						if(command.equals("help"))
-						{
-							ConsoleGUI.listCommands();
-						}
-
-						if(command.equals("shutdown"))
-						{
-							System.exit(0);
+						switch (command) {
+							case "help" -> ConsoleGUI.listCommands();
+							case "error" -> System.out.println("ERROR: command must be only one word.");
+							case "logout" -> user = null;
+							case "search" -> {
+								String method = ConsoleGUI.searchMethod();
+								if(method.equals("error"))
+								{
+									System.out.println("ERROR: search method undefined");
+								}
+							}
+							case "shutdown" -> System.exit(0);
+							default -> System.out.println("Command does not exist.");
 						}
 
 						//////////////// End of if statement for every command /////////////////
@@ -68,8 +70,6 @@ public class Main
 
 		
 		// String row = "Starboy,1,https://open.spotify.com/track/5aAx2yezTd8zXrkmtKl66Z,The Weeknd, Daft Punk";
-		
-
 		// User user = userDatabase.importUser("Bae");
 		// ArrayList<Song> res = db.searchSong("starboy");
 		// System.out.println(res);
