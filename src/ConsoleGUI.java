@@ -257,4 +257,11 @@ public class ConsoleGUI {
     {
 
     }
+
+    public static void showFavorites(ArrayList<Object> all) {
+        for(Object o: all)
+        {
+            System.out.println(o);
+        }
+    }
 }

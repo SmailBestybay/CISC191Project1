@@ -144,4 +144,12 @@ public class User extends Person
 	{
 		return artists;
 	}
+
+	public ArrayList<Object> getAll()
+	{
+		ArrayList<Object> all = new ArrayList<Object>();
+		all.addAll(getSongs());
+		all.addAll(getArtists());
+		return all;
+	}
 }

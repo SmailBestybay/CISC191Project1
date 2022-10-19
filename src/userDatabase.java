@@ -124,8 +124,12 @@ public class userDatabase
 	 * Can use this to also "register" the user
 	 * exports user's song and artist data into 2 csv file in a folder specific to user.
 	 */
-	public static void exportCSV(User user)
+	public static void exportCSV(User user) throws NullPointerException
 	{
+		if (user == null)
+		{
+			throw new NullPointerException("ERROR: user is null");
+		}
 		String path = "Users/" + user.getName() + "/";
 		File file = new File(path);
 		file.mkdirs();
