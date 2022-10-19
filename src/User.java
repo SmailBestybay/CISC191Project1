@@ -2,14 +2,19 @@ import java.util.ArrayList;
 
 public class User extends Person
 {
-	private ArrayList<Song> songs = new ArrayList<Song>();
-	private ArrayList<Artist> artists = new ArrayList<Artist>();
+	private final ArrayList<Song> songs = new ArrayList<Song>();
+	private final ArrayList<Artist> artists = new ArrayList<Artist>();
 	
 	public User(String name)
 	{
 		super(name);
 	}
-	
+
+	@Override
+	public String toString() {
+		return getName();
+	}
+
 	/**
 	 * 
 	 * @param newSong
@@ -36,7 +41,7 @@ public class User extends Person
 	
 	/**
 	 * 
-	 * @param newSong
+	 * @param newSong song to add
 	 * @return string status message
 	 */
 	public String removeSong(Song newSong)
@@ -60,7 +65,7 @@ public class User extends Person
 	
 	/**
 	 * 
-	 * @param newArtist
+	 * @param newArtist artist to add
 	 * @return string status message
 	 */
 	public String addArtist(Artist newArtist)
@@ -84,7 +89,7 @@ public class User extends Person
 	
 	/**
 	 * 
-	 * @param newArtist
+	 * @param newArtist artist to remove
 	 * @return string status message
 	 */
 	public String removeArtist(Artist newArtist)
@@ -129,7 +134,7 @@ public class User extends Person
 
 	/**
 	 * modify to return deep copy later
-	 * @return
+	 * @return songs
 	 */
 	public ArrayList<Song> getSongs()
 	{
@@ -138,7 +143,7 @@ public class User extends Person
 
 	/**
 	 * modify to return deep copy later
-	 * @return
+	 * @return artists
 	 */
 	public ArrayList<Artist> getArtists()
 	{

@@ -5,7 +5,7 @@ import java.util.Objects;
  * @author Dre, Smail 
  * Represents a person. A person has a name. 
  */
-public class Person
+public abstract class Person
 {
 	//Fields
 	private String name;
@@ -24,9 +24,11 @@ public class Person
 	{
 		return name;
 	}
+
+	public abstract String toString();
 	
 	/**
-	 * @param Object other
+	 * @param other object to compare
 	 * @return boolean 
 	 */
 	@Override
