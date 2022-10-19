@@ -239,7 +239,7 @@ public class ConsoleGUI {
             if(keyboard.hasNextInt())
             {
                 index = keyboard.nextInt();
-
+                keyboard.nextLine();
                 if(index < 0)
                 {
                     index = -1;

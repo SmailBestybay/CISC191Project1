@@ -55,8 +55,8 @@ public class Main
 									case "error" -> System.out.println("ERROR: search method undefined");
 									case "artist" -> {
 										ArrayList<Artist> artists = db.searchArtist(ConsoleGUI.searchByArtists());
-										ConsoleGUI.displayArtistResults(artists);
-
+										user.addArtist(ConsoleGUI.displayArtistResults(artists));
+										userDatabase.exportCSV(user);
 									}
 									case "songs" -> {
 										ConsoleGUI.searchBySong();
@@ -65,6 +65,7 @@ public class Main
 										ConsoleGUI.search();
 									}
 								}
+							break;
 							}
 							case "shutdown" -> System.exit(0);
 							default -> System.out.println("Command does not exist.");
