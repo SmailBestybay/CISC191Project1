@@ -14,8 +14,8 @@ public class Song
 	// Artists field is string temporary
 	private ArrayList<Artist> artists = null;
 	
-	public Song() {};
-	
+	public Song() {}
+
 
 	public Song(String title, String rank, String url, ArrayList<Artist> artists)
 	{
@@ -34,7 +34,7 @@ public class Song
 	}
 	
 	/**
-	 * @param Object other
+	 * @param  other object to compare
 	 * @return boolean 
 	 */
 	@Override
@@ -44,12 +44,12 @@ public class Song
 		{
 			return true;
 		}
-		
+
 		if(other == null)
 		{
 			return false;
 		}
-		
+
 		if(other instanceof Song)
 		{
 			Song song = (Song) other;

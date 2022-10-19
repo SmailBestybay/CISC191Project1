@@ -11,7 +11,7 @@ import org.apache.commons.csv.CSVRecord;
 public class SpotifyDatabase
 {
 	private static Song[] songs;
-	private static ArrayList<Artist> artists = new ArrayList<Artist>();
+	private static final ArrayList<Artist> artists = new ArrayList<Artist>();
 	
 	/**
 	 *  Constructor that initializes song and artist database
@@ -111,7 +111,7 @@ public class SpotifyDatabase
 	
 	/**
 	 * Will change to return a deep copy
-	 * @return 
+	 * @return  songs
 	 */
 	public static Song[] getSongs()
 	{
@@ -129,7 +129,7 @@ public class SpotifyDatabase
 	
 	/**
 	 * 
-	 * @param title
+	 * @param title of the song
 	 * @return String of the result
 	 */
 	public ArrayList<Song> searchSong(String title)
