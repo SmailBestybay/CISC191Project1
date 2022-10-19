@@ -65,7 +65,7 @@ public class Main
 									}
 								}
 							}
-							case "showFavorites" -> ConsoleGUI.showFavorites(user.getAll());
+							case "showAll" -> ConsoleGUI.showFavorites(user.getAll());
 							case "shutdown" -> System.exit(0);
 							default -> System.out.println("Command does not exist.");
 						}

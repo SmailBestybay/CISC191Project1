@@ -150,11 +150,13 @@ public class User extends Person
 		return artists;
 	}
 
-	public ArrayList<Object> getAll()
+	public ArrayList<ArrayList<Object>> getAll()
 	{
-		ArrayList<Object> all = new ArrayList<Object>();
-		all.addAll(getSongs());
-		all.addAll(getArtists());
+		ArrayList<ArrayList<Object>> all = new ArrayList<ArrayList<Object>>();
+		all.add(new ArrayList<Object>());
+		all.get(0).addAll(getSongs());
+		all.add(new ArrayList<Object>());
+		all.get(1).addAll(getArtists());
 		return all;
 	}
 }

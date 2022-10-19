@@ -258,10 +258,20 @@ public class ConsoleGUI {
 
     }
 
-    public static void showFavorites(ArrayList<Object> all) {
-        for(Object o: all)
+    public static void showFavorites(ArrayList<ArrayList<Object>> all) {
+        for (int i = 0; i < all.size(); i++)
         {
-            System.out.println(o);
+            System.out.println("---------------------------------------------------------");
+            if(i == 0)
+            {
+                System.out.println("These are your favorite songs");
+            } else if (i == 1) {
+                System.out.println("These are your favorite artists");
+            }
+            for (int j = 0; j < all.get(i).size(); j++)
+            {
+                System.out.println(all.get(i).get(j));
+            }
         }
     }
 }
