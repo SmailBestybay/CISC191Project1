@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * View
  */
-public class ConsoleGUI {
+public class ConsoleUI {
     // scanner needs to be static so that we do not close it multiple times
     // closing scanner closes System.in, for all other methods.
     private static final Scanner keyboard = new Scanner(System.in);

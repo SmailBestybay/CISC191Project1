@@ -16,19 +16,19 @@ public class Main
 		User user = null;
 		// Greet user, then login or register user
 		try {
-			ConsoleGUI.greetings();
+			ConsoleUI.greetings();
 
 			while(user == null)
 			{
-				if(ConsoleGUI.promptToShowExistingUsers())
+				if(ConsoleUI.promptToShowExistingUsers())
 				{
-					ConsoleGUI.showExistingUsers();
+					ConsoleUI.showExistingUsers();
 				}
-				user = ConsoleGUI.login();
+				user = ConsoleUI.login();
 				if (user == null)
 				{
 					// register user
-					user = ConsoleGUI.register();
+					user = ConsoleUI.register();
 				} else {
 
 					// Enter standby mode:
@@ -41,39 +41,39 @@ public class Main
 						// Listen to commands from user.
 						System.out.println("Standing by for a command...");
 						System.out.println("Enter \"help\" for list of available commands");
-						String command = ConsoleGUI.standByMode();
+						String command = ConsoleUI.standByMode();
 
 						/////////////////// if statement for every command ///////////////////
 
 						switch (command) {
-							case "help" -> ConsoleGUI.listCommands();
+							case "help" -> ConsoleUI.listCommands();
 							case "error" -> System.out.println("ERROR: command must be only one word.");
 							case "logout" -> user = null;
 							case "search" -> {
-								switch (ConsoleGUI.searchMethod()) {
+								switch (ConsoleUI.searchMethod()) {
 									case "error" -> System.out.println("ERROR: search method undefined");
 									case "artist" -> {
 										// console gui search artist should return null
 										// if the user does not want to add any of the search
 										// results. We can use null check to decide weather we need to proceed
 
-										ArrayList<Artist> artists = db.searchArtist(ConsoleGUI.searchByArtists());
-										user.addArtist(ConsoleGUI.displayArtistResults(artists));
+										ArrayList<Artist> artists = db.searchArtist(ConsoleUI.searchByArtists());
+										user.addArtist(ConsoleUI.displayArtistResults(artists));
 										userDatabase.exportCSV(user);
 									}
 									case "song" -> {
-										ArrayList<Song> songs = db.searchSong(ConsoleGUI.searchBySong());
-										user.addSong(ConsoleGUI.displaySongResults(songs));
+										ArrayList<Song> songs = db.searchSong(ConsoleUI.searchBySong());
+										user.addSong(ConsoleUI.displaySongResults(songs));
 										userDatabase.exportCSV(user);
 									}
 									case "mixed" -> {
-										ConsoleGUI.search();
+										ConsoleUI.search();
 									}
 								}
 							}
-							case "showAll" -> ConsoleGUI.showFavorites(user.getAll());
+							case "showAll" -> ConsoleUI.showFavorites(user.getAll());
 							case "remove" -> {
-								Object object = ConsoleGUI.removeEntry(user.getAll());
+								Object object = ConsoleUI.removeEntry(user.getAll());
 								if(object instanceof Song)
 								{
 									user.removeSong((Song) object);
