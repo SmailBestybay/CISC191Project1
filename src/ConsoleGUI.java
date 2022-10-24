@@ -143,9 +143,7 @@ public class ConsoleGUI {
             System.out.println("Please enter user name to register: ");
             String name = keyboard.nextLine();
             // validate name input to be one word
-            String[] arr = name.trim().split(" ");
-
-            if(arr.length == 1)
+            if(isOneWord(name))
             {
                 if(name.equals("exit"))
                 {
@@ -175,8 +173,7 @@ public class ConsoleGUI {
     public static String standByMode()
     {
         String command = keyboard.nextLine();
-        String[] arr = command.trim().split(" ");
-        if(arr.length == 1)
+        if(isOneWord(command))
         {
             return command;
         } else {
@@ -213,9 +210,13 @@ public class ConsoleGUI {
     }
 
     public static void searchBySong() {
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Not implemented yet.");
     }
 
     public static void search() {
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Not implemented yet.");
     }
 
     public static Artist displayArtistResults(ArrayList<Artist> artists)
@@ -255,7 +256,7 @@ public class ConsoleGUI {
 
     public static void displaySongResults(ArrayList<Song> songs)
     {
-
+        System.out.println("Not implemented yet.");
     }
 
     public static void showFavorites(ArrayList<ArrayList<Object>> all) {
@@ -265,13 +266,81 @@ public class ConsoleGUI {
             if(i == 0)
             {
                 System.out.println("These are your favorite songs");
-            } else if (i == 1) {
+            } else {
                 System.out.println("These are your favorite artists");
             }
             for (int j = 0; j < all.get(i).size(); j++)
             {
+                if (i == 0)
+                {
+                    System.out.println("--> Song entry number: " + j + " <--");
+                } else {
+                    System.out.println("--> Artist entry number: " + j + " <--");
+
+                }
+                System.out.println(all.get(i).get(j).getClass()); // temp line. delete later.
                 System.out.println(all.get(i).get(j));
             }
         }
+    }
+
+    /**
+     *
+     * @param all combined array of songs and artists
+     * @return entryObject song or artist object as object.
+     */
+    public static Object removeEntry(ArrayList<ArrayList<Object>> all)
+    {
+        System.out.println("---------------------------------------------------------");
+        System.out.println("To remove song enter 0, to remove artist enter 1");
+        System.out.println("Enter your choice:");
+        String songOrArtist = keyboard.nextLine();
+        if(!isOneWord(songOrArtist))
+        {
+            System.out.println("Error: input should be only one word");
+            return null;
+        }
+        int category;
+        try {
+            category =Integer.parseInt(songOrArtist);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("Error: Must enter a number: 0 for song, 1 for artist.");
+            return null;
+        }
+
+        System.out.println("Please enter the number of the entry: ");
+        String entryChoice = keyboard.nextLine();
+
+        if(!isOneWord(entryChoice))
+        {
+            System.out.println("Error: entry should be one word");
+            return null;
+        }
+
+        int entry;
+        try {
+            entry = Integer.parseInt(entryChoice);
+        } catch (NumberFormatException e)
+        {
+            System.out.println("Error: Must enter a number");
+            return null;
+        }
+
+        Object entryObject = null;
+        try {
+            entryObject = all.get(category).get(entry);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Error: Choice is not valid.");
+        }
+
+        return entryObject;
+    }
+
+    private static boolean isOneWord(String input)
+    {
+        String[] arr = input.trim().split(" ");
+        return arr.length == 1;
     }
 }
