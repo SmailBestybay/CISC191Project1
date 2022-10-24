@@ -209,9 +209,10 @@ public class ConsoleGUI {
         return keyboard.nextLine();
     }
 
-    public static void searchBySong() {
+    public static String searchBySong() {
         System.out.println("---------------------------------------------------------");
-        System.out.println("Not implemented yet.");
+        System.out.println("Please enter your search query:");
+        return keyboard.nextLine();
     }
 
     public static void search() {
@@ -236,16 +237,23 @@ public class ConsoleGUI {
         int index = -1;
         while(index == -1)
         {
-            System.out.println("Pick the artist to add to you favorites list");
+            System.out.println("Pick the artist to add to you favorites list (To exit enter -2)");
             if(keyboard.hasNextInt())
             {
                 index = keyboard.nextInt();
                 keyboard.nextLine();
+                if (index == -2)
+                {
+                    return null;
+                }
                 if(index < 0)
                 {
                     index = -1;
                     System.out.println("Number can not be negative");
-                }
+                } else if (index >= artists.size()) {
+                    index = -1;
+                    System.out.println("Invalid number");
+            }
             } else {
                 System.out.println("Error: please enter the number");
                 keyboard.nextLine();
@@ -254,9 +262,46 @@ public class ConsoleGUI {
         return artists.get(index);
     }
 
-    public static void displaySongResults(ArrayList<Song> songs)
+    public static Song displaySongResults(ArrayList<Song> songs)
     {
-        System.out.println("Not implemented yet.");
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Song search results: ");
+        if (songs == null)
+        {
+            System.out.println("No Songs Found.");
+            return null;
+        }
+
+        for (int i = 0; i < songs.size(); i++) {
+            System.out.println("--> " + i + " <--");
+            System.out.println(songs.get(i));
+        }
+        int index = -1;
+        while(index == -1)
+        {
+            System.out.println("Pick the song to add to you favorites list (To exit enter -2)");
+            if(keyboard.hasNextInt())
+            {
+                index = keyboard.nextInt();
+                keyboard.nextLine();
+                if (index == -2)
+                {
+                    return null;
+                }
+                if(index < 0)
+                {
+                    index = -1;
+                    System.out.println("Number can not be negative");
+                } else if (index >= songs.size()) {
+                    index = -1;
+                    System.out.println("Invalid number");
+                }
+            } else {
+                System.out.println("Error: please enter the number");
+                keyboard.nextLine();
+            }
+        }
+        return songs.get(index);
     }
 
     public static void showFavorites(ArrayList<ArrayList<Object>> all) {
@@ -278,7 +323,6 @@ public class ConsoleGUI {
                     System.out.println("--> Artist entry number: " + j + " <--");
 
                 }
-                System.out.println(all.get(i).get(j).getClass()); // temp line. delete later.
                 System.out.println(all.get(i).get(j));
             }
         }

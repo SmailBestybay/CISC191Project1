@@ -61,8 +61,10 @@ public class Main
 										user.addArtist(ConsoleGUI.displayArtistResults(artists));
 										userDatabase.exportCSV(user);
 									}
-									case "songs" -> {
-										ConsoleGUI.searchBySong();
+									case "song" -> {
+										ArrayList<Song> songs = db.searchSong(ConsoleGUI.searchBySong());
+										user.addSong(ConsoleGUI.displaySongResults(songs));
+										userDatabase.exportCSV(user);
 									}
 									case "mixed" -> {
 										ConsoleGUI.search();
