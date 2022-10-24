@@ -93,6 +93,11 @@ public class Song implements Comparable<Song>
 		return artists;
 	}
 
+	/**
+	 * Compare based on song rank
+	 * @param song the object to be compared.
+	 * @return int number based on ranking comparison
+	 */
 	@Override
 	public int compareTo(Song song) {
 		int ranking = Integer.parseInt(getRank());
