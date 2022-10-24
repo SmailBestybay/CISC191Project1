@@ -159,7 +159,7 @@ public class userDatabase
 				}
 				// close quote for artist cell
 				line.append("\"");
-				pw.println(line.toString());
+				pw.println(line);
 			}
 		}
 		catch (IOException e)

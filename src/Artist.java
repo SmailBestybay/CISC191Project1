@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Artist extends Person implements Comparable<Artist>
 {
-	private ArrayList<Song> songs;
+	private final ArrayList<Song> songs;
 	
 	public Artist(String name)
 	{
