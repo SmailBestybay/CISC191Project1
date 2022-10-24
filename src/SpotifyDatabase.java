@@ -51,8 +51,8 @@ public class SpotifyDatabase
 
 	/**
 	 * create artists and add them to db list 
-	 * @param artists
-	 * @return
+	 * @param artists song artists
+	 * @return new artists
 	 */
 	private static ArrayList<Artist> createArtists(String artists)
 	{
@@ -70,8 +70,8 @@ public class SpotifyDatabase
 	
 	/**
 	 * Add or create then add artist to the database.
-	 * @param artistName
-	 * @return
+	 * @param artistName name of artist
+	 * @return new or existing artist
 	 */
 	private static Artist addOrCreateArtist(String artistName)
 	{

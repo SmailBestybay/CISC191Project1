@@ -53,10 +53,6 @@ public class Main
 								switch (ConsoleUI.searchMethod()) {
 									case "error" -> System.out.println("ERROR: search method undefined");
 									case "artist" -> {
-										// console gui search artist should return null
-										// if the user does not want to add any of the search
-										// results. We can use null check to decide weather we need to proceed
-
 										ArrayList<Artist> artists = db.searchArtist(ConsoleUI.searchByArtists());
 										user.addArtist(ConsoleUI.displayArtistResults(artists));
 										userDatabase.exportCSV(user);

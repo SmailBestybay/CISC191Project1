@@ -187,6 +187,12 @@ public class ConsoleUI {
     public static void listCommands()
     {
         System.out.println("LIST OF COMMANDS");
+        System.out.println("help -- lists commands");
+        System.out.println("logout -- logout user");
+        System.out.println("search -- search spotify database");
+        System.out.println("showAll -- show current user's all favorites");
+        System.out.println("remove -- remove entry from favorites");
+        System.out.println("shutdown -- shutdown app.");
     }
 
     public static String searchMethod()

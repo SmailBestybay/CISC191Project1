@@ -5,7 +5,7 @@ import java.util.Objects;
  * @author Smail Bestybay
  *
  */
-public class Song
+public class Song implements Comparable<Song>
 {
 	private String title;
 	private String rank;
@@ -91,5 +91,19 @@ public class Song
 	public ArrayList<Artist> getArtists()
 	{
 		return artists;
+	}
+
+	@Override
+	public int compareTo(Song song) {
+		int ranking = Integer.parseInt(getRank());
+		int songRanking = Integer.parseInt(song.getRank());
+		if (ranking == songRanking)
+		{
+			return 0;
+		} else if (ranking > songRanking) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 }
