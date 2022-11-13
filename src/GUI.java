@@ -81,11 +81,11 @@ public class GUI extends JFrame {
         messageLabel.setText("Welcome! Please Log in or Register");
 
         // center components
-        userNameFieldLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        userNameField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        centerWidget(userNameFieldLabel);
+        centerWidget(userNameField);
+        centerWidget(loginButton);
+        centerWidget(registerButton);
+        centerWidget(messageLabel);
 
         // adds space to the top of the center panel
         logInPanel.add(Box.createRigidArea(new Dimension(0,100)));
@@ -100,6 +100,14 @@ public class GUI extends JFrame {
 
         // add space to the bot of the center panel
         logInPanel.add(Box.createRigidArea(new Dimension(0,100)));
+    }
+
+    /**
+     * Helper method to center a component.
+     * @param component center the component
+     */
+    private static void centerWidget(JComponent component){
+        component.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
 }
