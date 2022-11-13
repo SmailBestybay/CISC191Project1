@@ -12,6 +12,10 @@ public class GUI extends JFrame {
     // Navbar components
     private JLabel appName;
     private JButton listUserButton;
+    private JButton favoriteSongsButton;
+    private JButton favoriteArtistsButton;
+    private JButton logOutButton;
+    private JLabel currentUserLabel;
 
     // Logged out state center components
     private JLabel userNameFieldLabel;
@@ -36,6 +40,7 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
+
     }
 
     /**
@@ -59,15 +64,23 @@ public class GUI extends JFrame {
      *
      */
     private void makeNavbar() {
+        // set up all components of the navbar, includes logged in and logged out state
         navbar = new JPanel();
         appName = new JLabel(GUI.APP_NAME);
         appName.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
+
+        // logged out state components
         listUserButton = new JButton("Show Users");
 
+        // logged in state components
+        favoriteSongsButton = new JButton("My Songs");
+        favoriteArtistsButton = new JButton("My Artists");
+        logOutButton = new JButton("Log Out");
+
+
         navbar.add(appName);
-        navbar.add(Box.createHorizontalStrut(10));
+        navbar.add(Box.createHorizontalStrut(30));
         navbar.add(listUserButton);
-        System.out.println(Arrays.toString(navbar.getComponents()));
     }
 
     private void makeLogInPanel() {
@@ -77,7 +90,7 @@ public class GUI extends JFrame {
         // instantiate components of this panel
         userNameFieldLabel = new JLabel("User Name");
         userNameField = new JTextField(2);
-        userNameField.setMaximumSize(new Dimension(200, 50));
+        userNameField.setMaximumSize(new Dimension(200, 26));
         loginButton = new JButton("Log in");
         registerButton = new JButton("Register");
         messageLabel = new JLabel();
@@ -115,15 +128,30 @@ public class GUI extends JFrame {
 
     public void updateNavbar(User user){
 
+        Component horizontalStrut = Box.createHorizontalStrut(20);
+
         // if logged out state, remove components
         if (user == null) {
-            navbar.add(Box.createHorizontalStrut(10));
+            for (int i = 2; i < navbar.getComponents().length; i++) {
+                navbar.remove(i);
+            }
             navbar.add(listUserButton);
+            pack();
         }
 
         // if logged in, add components
         if (user != null) {
+            currentUserLabel = new JLabel(user.getName());
+            navbar.remove(listUserButton);
 
+            navbar.add(favoriteSongsButton);
+            navbar.add(horizontalStrut);
+            navbar.add(favoriteArtistsButton);
+            navbar.add(horizontalStrut);
+            navbar.add(logOutButton);
+            navbar.add(currentUserLabel);
+            navbar.add(horizontalStrut);
+            pack();
         }
 
 
