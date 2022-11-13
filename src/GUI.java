@@ -11,6 +11,8 @@ public class GUI extends JFrame {
 
     // Logged out state components
     private JLabel userNameFieldLabel;
+    private JTextField userNameField;
+    private JButton loginButton;
 
 
     /**
@@ -59,15 +61,28 @@ public class GUI extends JFrame {
     private void makeLogInPanel() {
         logInPanel = new JPanel();
         logInPanel.setLayout(new BoxLayout(logInPanel, BoxLayout.Y_AXIS));
-        userNameFieldLabel = new JLabel("User Name");
 
-        // centers label
+        // instantiate components of this panel
+        userNameFieldLabel = new JLabel("User Name");
+        userNameField = new JTextField(2);
+        userNameField.setMaximumSize(new Dimension(200, 50));
+        loginButton = new JButton("Log in");
+
+        // center components
         userNameFieldLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        userNameField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // adds space to the top of the center panel
-        logInPanel.add(Box.createRigidArea(new Dimension(0,20)));
+        logInPanel.add(Box.createRigidArea(new Dimension(0,100)));
 
+        // add components
         logInPanel.add(userNameFieldLabel);
+        logInPanel.add(userNameField);
+        logInPanel.add(loginButton);
+
+        // add space to the bot of the center panel
+        logInPanel.add(Box.createRigidArea(new Dimension(0,100)));
     }
 
 }
