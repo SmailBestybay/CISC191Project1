@@ -7,12 +7,17 @@ public class GUI extends JFrame {
     private JPanel body;
     private JPanel navbar;
     private JPanel logInPanel;
-    private JLabel appName;
 
-    // Logged out state components
+    // Navbar components
+    private JLabel appName;
+    private JButton listUserButton;
+
+    // Logged out state center components
     private JLabel userNameFieldLabel;
     private JTextField userNameField;
     private JButton loginButton;
+    private JButton registerButton;
+    private JLabel messageLabel;
 
 
     /**
@@ -26,8 +31,9 @@ public class GUI extends JFrame {
 
         add(body);
 
-        setSize(400,400);
+        setSize(500,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
         setVisible(true);
     }
 
@@ -55,7 +61,10 @@ public class GUI extends JFrame {
         navbar = new JPanel();
         appName = new JLabel(GUI.APP_NAME);
         appName.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
+        listUserButton = new JButton("Show Users");
         navbar.add(appName);
+        navbar.add(Box.createHorizontalStrut(10));
+        navbar.add(listUserButton);
     }
 
     private void makeLogInPanel() {
@@ -67,11 +76,16 @@ public class GUI extends JFrame {
         userNameField = new JTextField(2);
         userNameField.setMaximumSize(new Dimension(200, 50));
         loginButton = new JButton("Log in");
+        registerButton = new JButton("Register");
+        messageLabel = new JLabel();
+        messageLabel.setText("Welcome! Please Log in or Register");
 
         // center components
         userNameFieldLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         userNameField.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // adds space to the top of the center panel
         logInPanel.add(Box.createRigidArea(new Dimension(0,100)));
@@ -80,6 +94,9 @@ public class GUI extends JFrame {
         logInPanel.add(userNameFieldLabel);
         logInPanel.add(userNameField);
         logInPanel.add(loginButton);
+        logInPanel.add(registerButton);
+        logInPanel.add(Box.createRigidArea(new Dimension(0,50)));
+        logInPanel.add(messageLabel);
 
         // add space to the bot of the center panel
         logInPanel.add(Box.createRigidArea(new Dimension(0,100)));
