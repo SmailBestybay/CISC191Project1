@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class GUI extends JFrame {
 
@@ -62,9 +63,11 @@ public class GUI extends JFrame {
         appName = new JLabel(GUI.APP_NAME);
         appName.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
         listUserButton = new JButton("Show Users");
+
         navbar.add(appName);
         navbar.add(Box.createHorizontalStrut(10));
         navbar.add(listUserButton);
+        System.out.println(Arrays.toString(navbar.getComponents()));
     }
 
     private void makeLogInPanel() {
@@ -108,6 +111,22 @@ public class GUI extends JFrame {
      */
     private static void centerWidget(JComponent component){
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
+    }
+
+    public void updateNavbar(User user){
+
+        // if logged out state, remove components
+        if (user == null) {
+            navbar.add(Box.createHorizontalStrut(10));
+            navbar.add(listUserButton);
+        }
+
+        // if logged in, add components
+        if (user != null) {
+
+        }
+
+
     }
 
 }
