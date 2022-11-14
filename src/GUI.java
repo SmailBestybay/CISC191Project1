@@ -6,19 +6,11 @@ public class GUI extends JFrame {
 
     private static final String APP_NAME = "Spotify Super Lite!";
     private JPanel body;
-    private JPanel navbar;
+    private Navbar navbar;
     private JPanel logInPanel;
     private JPanel contentPanel;
 
-    // Navbar components
-    private JLabel appName;
-    private JButton listUserButton;
-    private JButton favoriteSongsButton;
-    private JButton favoriteArtistsButton;
-    private JButton logOutButton;
-    private JLabel currentUserLabel;
-
-    // Logged out state center components
+    // Logged out state center components, LogInPanel
     private JLabel userNameFieldLabel;
     private JTextField userNameField;
     private JButton loginButton;
@@ -55,7 +47,7 @@ public class GUI extends JFrame {
         pack();
         setVisible(true);
 
-        updateBody(new User("Smile"));
+//        updateBody(new User("Smile"));
 
     }
 
@@ -66,7 +58,7 @@ public class GUI extends JFrame {
      */
     private void makeBody() {
         body = new JPanel(new BorderLayout());
-        makeNavbar();
+        navbar = new Navbar();
         makeLogInPanel();
         body.add(navbar, BorderLayout.NORTH);
         body.add(logInPanel, BorderLayout.CENTER);
@@ -75,73 +67,16 @@ public class GUI extends JFrame {
     public void updateBody(User user) {
 
         if (user == null){
-            updateNavbar(null);
+            navbar.updateNavbar(null);
             body.remove(contentPanel);
             body.add(logInPanel, BorderLayout.CENTER);
         }
 
         if (user != null) {
-            updateNavbar(user);
+            navbar.updateNavbar(user);
             body.remove(logInPanel);
             makeContentPanel();
             body.add(contentPanel, BorderLayout.CENTER);
-        }
-        pack();
-    }
-
-    /**
-     * make navbar JPanel.
-     * start in Logged out state.
-     *
-     */
-    private void makeNavbar() {
-        // set up all components of the navbar, includes logged in and logged out state
-        navbar = new JPanel();
-        appName = new JLabel(GUI.APP_NAME);
-        appName.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
-
-        // logged out state components
-        listUserButton = new JButton("Show Users");
-
-        // logged in state components
-        favoriteSongsButton = new JButton("My Songs");
-        favoriteArtistsButton = new JButton("My Artists");
-        logOutButton = new JButton("Log Out");
-
-
-        navbar.add(appName);
-        navbar.add(Box.createHorizontalStrut(30));
-        navbar.add(listUserButton);
-    }
-
-    /**
-     * Update navbar from logged in state to logged out state and vice versa.
-     * @param user current user data
-     */
-    public void updateNavbar(User user){
-
-        Component horizontalStrut = Box.createHorizontalStrut(20);
-
-        // if logged out state, remove components
-        if (user == null) {
-            for (int i = 2; i < navbar.getComponents().length; i++) {
-                navbar.remove(i);
-            }
-            navbar.add(listUserButton);
-        }
-
-        // if logged in, add components
-        if (user != null) {
-            currentUserLabel = new JLabel(user.getName());
-            navbar.remove(listUserButton);
-
-            navbar.add(favoriteSongsButton);
-            navbar.add(horizontalStrut);
-            navbar.add(favoriteArtistsButton);
-            navbar.add(horizontalStrut);
-            navbar.add(logOutButton);
-            navbar.add(currentUserLabel);
-            navbar.add(horizontalStrut);
         }
         pack();
     }
@@ -221,7 +156,66 @@ public class GUI extends JFrame {
     private static void centerWidget(JComponent component){
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
+    class Navbar extends JPanel {
+        // Navbar components
+        private JLabel appName;
+        private JButton listUserButton;
+        private JButton favoriteSongsButton;
+        private JButton favoriteArtistsButton;
+        private JButton logOutButton;
+        private JLabel currentUserLabel;
 
+        public Navbar() {
+            super();
+            appName = new JLabel(GUI.APP_NAME);
+            appName.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
+
+            // logged out state components
+            listUserButton = new JButton("Show Users");
+
+            // logged in state components
+            favoriteSongsButton = new JButton("My Songs");
+            favoriteArtistsButton = new JButton("My Artists");
+            logOutButton = new JButton("Log Out");
+
+
+            add(appName);
+            add(Box.createHorizontalStrut(30));
+            add(listUserButton);
+        }
+
+        /**
+         * Update navbar from logged in state to logged out state and vice versa.
+         * @param user current user data
+         */
+        public void updateNavbar(User user){
+
+            Component horizontalStrut = Box.createHorizontalStrut(20);
+
+            // if logged out state, remove components
+            if (user == null) {
+                for (int i = 2; i < getComponents().length; i++) {
+                    remove(i);
+                }
+                add(listUserButton);
+            }
+
+            // if logged in, add components
+            if (user != null) {
+                currentUserLabel = new JLabel(user.getName());
+                remove(listUserButton);
+
+                add(favoriteSongsButton);
+                add(horizontalStrut);
+                add(favoriteArtistsButton);
+                add(horizontalStrut);
+                add(logOutButton);
+                add(currentUserLabel);
+                add(horizontalStrut);
+            }
+            pack();
+        }
+    }
     class SongItem extends JPanel {
         private JLabel title;
         private JLabel rank;
