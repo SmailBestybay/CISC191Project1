@@ -8,6 +8,7 @@ public class GUI extends JFrame {
     private JPanel body;
     private JPanel navbar;
     private JPanel logInPanel;
+    private JPanel contentPanel;
 
     // Navbar components
     private JLabel appName;
@@ -23,6 +24,19 @@ public class GUI extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
     private JLabel messageLabel;
+
+    // Content panel components
+    private JPanel searchPanel;
+    private JPanel itemsPanel;
+
+    // searchPanel components
+    private JLabel searchLabel;
+    private JTextField searchField;
+    private JButton searchButton;
+    private JComboBox<String> searchMode;
+
+    // itemsPanel components
+    private SongItem[] songItems;
 
 
     /**
@@ -41,6 +55,8 @@ public class GUI extends JFrame {
         pack();
         setVisible(true);
 
+        updateBody(new User("Smile"));
+
     }
 
     /**
@@ -54,8 +70,23 @@ public class GUI extends JFrame {
         makeLogInPanel();
         body.add(navbar, BorderLayout.NORTH);
         body.add(logInPanel, BorderLayout.CENTER);
+    }
 
+    public void updateBody(User user) {
 
+        if (user == null){
+            updateNavbar(null);
+            body.remove(contentPanel);
+            body.add(logInPanel, BorderLayout.CENTER);
+        }
+
+        if (user != null) {
+            updateNavbar(user);
+            body.remove(logInPanel);
+            makeContentPanel();
+            body.add(contentPanel, BorderLayout.CENTER);
+        }
+        pack();
     }
 
     /**
@@ -81,6 +112,38 @@ public class GUI extends JFrame {
         navbar.add(appName);
         navbar.add(Box.createHorizontalStrut(30));
         navbar.add(listUserButton);
+    }
+
+    /**
+     * Update navbar from logged in state to logged out state and vice versa.
+     * @param user current user data
+     */
+    public void updateNavbar(User user){
+
+        Component horizontalStrut = Box.createHorizontalStrut(20);
+
+        // if logged out state, remove components
+        if (user == null) {
+            for (int i = 2; i < navbar.getComponents().length; i++) {
+                navbar.remove(i);
+            }
+            navbar.add(listUserButton);
+        }
+
+        // if logged in, add components
+        if (user != null) {
+            currentUserLabel = new JLabel(user.getName());
+            navbar.remove(listUserButton);
+
+            navbar.add(favoriteSongsButton);
+            navbar.add(horizontalStrut);
+            navbar.add(favoriteArtistsButton);
+            navbar.add(horizontalStrut);
+            navbar.add(logOutButton);
+            navbar.add(currentUserLabel);
+            navbar.add(horizontalStrut);
+        }
+        pack();
     }
 
     private void makeLogInPanel() {
@@ -118,6 +181,39 @@ public class GUI extends JFrame {
         logInPanel.add(Box.createRigidArea(new Dimension(0,100)));
     }
 
+    private void makeContentPanel(){
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        makeSearchPanel();
+        makeItemsPanel();
+
+        centerWidget(searchPanel);
+        centerWidget(itemsPanel);
+
+        contentPanel.add(searchPanel);
+        contentPanel.add(itemsPanel);
+    }
+
+    private void makeSearchPanel(){
+        searchPanel = new JPanel();
+
+        // components
+        searchLabel = new JLabel("Search for a song or an artist");
+        searchField = new JTextField(10);
+        searchButton = new JButton("Search");
+        String[] searchOptions = {"Song", "Artist", "Mixed"};
+        searchMode = new JComboBox<>(searchOptions);
+
+        searchPanel.add(searchLabel);
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+        searchPanel.add(searchMode);
+
+    }
+    private void makeItemsPanel() {
+        itemsPanel = new JPanel(new GridLayout(0,1));
+    }
+
     /**
      * Helper method to center a component.
      * @param component center the component
@@ -126,35 +222,32 @@ public class GUI extends JFrame {
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
-    public void updateNavbar(User user){
+    class SongItem extends JPanel {
+        private JLabel title;
+        private JLabel rank;
+        private JLabel artists;
+        private JButton addOrRemove;
 
-        Component horizontalStrut = Box.createHorizontalStrut(20);
-
-        // if logged out state, remove components
-        if (user == null) {
-            for (int i = 2; i < navbar.getComponents().length; i++) {
-                navbar.remove(i);
+        public SongItem(Song song, User user) {
+            this.title = new JLabel(song.getTitle());
+            this.rank = new JLabel(song.getRank());
+            StringBuilder artistsString = new StringBuilder();
+            for(Artist artist: song.getArtists()) {
+                artistsString.append(artist.getName());
+                artistsString.append(" ");
             }
-            navbar.add(listUserButton);
-            pack();
+            this.artists = new JLabel(artistsString.toString());
+            addOrRemove = new JButton("Add");
+            for (Song usersSong: user.getSongs()) {
+                if(song.equals(usersSong)) {
+                    addOrRemove.setText("Remove");
+                }
+            }
+            add(title);
+            add(rank);
+            add(artists);
+            add(addOrRemove);
         }
-
-        // if logged in, add components
-        if (user != null) {
-            currentUserLabel = new JLabel(user.getName());
-            navbar.remove(listUserButton);
-
-            navbar.add(favoriteSongsButton);
-            navbar.add(horizontalStrut);
-            navbar.add(favoriteArtistsButton);
-            navbar.add(horizontalStrut);
-            navbar.add(logOutButton);
-            navbar.add(currentUserLabel);
-            navbar.add(horizontalStrut);
-            pack();
-        }
-
-
     }
 
 }
