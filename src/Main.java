@@ -16,6 +16,7 @@ public class Main
 		SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
 		User user = null;
 		GUI view = new GUI();
+		Controller controller = new Controller(db, view);
 
 		// Greet user, then login or register user
 //		try {

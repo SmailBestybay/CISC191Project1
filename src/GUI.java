@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * GUI class, uses multiple nested inner classes to organise fields
@@ -26,9 +27,6 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-
-        updateBody(new User("Smile"));
-
     }
 
     /**
@@ -71,17 +69,19 @@ public class GUI extends JFrame {
     class ContentPanel extends JPanel {
         private SearchPanel searchPanel;
         private ItemsPanel itemsPanel;
+        private JScrollPane scrollPane;
         public ContentPanel(){
             super();
             setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
             searchPanel = new SearchPanel();
             itemsPanel = new ItemsPanel();
+            scrollPane = new JScrollPane(itemsPanel);
 
             centerWidget(searchPanel);
             centerWidget(itemsPanel);
 
             add(searchPanel);
-            add(itemsPanel);
+            add(scrollPane);
         }
 
         /**
@@ -119,11 +119,54 @@ public class GUI extends JFrame {
          */
         class ItemsPanel extends JPanel {
 
-            private SongItem[] songItems;
+            private ArrayList<SongItem> songItems;
             public ItemsPanel() {
                 super();
+                songItems = new ArrayList<>();
                 this.setLayout(new GridLayout(0,1));
             }
+
+            public void displayItems(ArrayList<Song> songs, User user) {
+                for (Component component: this.getComponents()) {
+                    this.remove(component);
+                }
+                for (int i = 0; i < songs.size(); i++) {
+                    songItems.add(new SongItem(songs.get(i), user));
+                    this.add(songItems.get(i));
+                }
+                pack();
+            }
+        }
+    }
+
+    /**
+     * Song item inner class
+     */
+    class SongItem extends JPanel {
+        private JLabel title;
+        private JLabel rank;
+        private JLabel artists;
+        private JButton addOrRemove;
+
+        public SongItem(Song song, User user) {
+            this.title = new JLabel(song.getTitle());
+            this.rank = new JLabel(song.getRank());
+            StringBuilder artistsString = new StringBuilder();
+            for(Artist artist: song.getArtists()) {
+                artistsString.append(artist.getName());
+                artistsString.append(" ");
+            }
+            this.artists = new JLabel(artistsString.toString());
+            addOrRemove = new JButton("Add");
+            for (Song usersSong: user.getSongs()) {
+                if(song.equals(usersSong)) {
+                    addOrRemove.setText("Remove");
+                }
+            }
+            add(title);
+            add(rank);
+            add(artists);
+            add(addOrRemove);
         }
     }
 
@@ -196,7 +239,13 @@ public class GUI extends JFrame {
      */
     class LogInPanel extends JPanel {
         private JLabel userNameFieldLabel;
+
+
+
         private JTextField userNameField;
+
+
+
         private JButton loginButton;
         private JButton registerButton;
         private JLabel messageLabel;
@@ -235,37 +284,22 @@ public class GUI extends JFrame {
             // add space to the bot of the center panel
             add(Box.createRigidArea(new Dimension(0,100)));
         }
+
+        public JTextField getUserNameField() {
+            return userNameField;
+        }
+
+        public JButton getLoginButton() {
+            return loginButton;
+        }
     }
 
     /**
-     * Song item inner class
+     *
+     * @return log in panel
      */
-    class SongItem extends JPanel {
-        private JLabel title;
-        private JLabel rank;
-        private JLabel artists;
-        private JButton addOrRemove;
-
-        public SongItem(Song song, User user) {
-            this.title = new JLabel(song.getTitle());
-            this.rank = new JLabel(song.getRank());
-            StringBuilder artistsString = new StringBuilder();
-            for(Artist artist: song.getArtists()) {
-                artistsString.append(artist.getName());
-                artistsString.append(" ");
-            }
-            this.artists = new JLabel(artistsString.toString());
-            addOrRemove = new JButton("Add");
-            for (Song usersSong: user.getSongs()) {
-                if(song.equals(usersSong)) {
-                    addOrRemove.setText("Remove");
-                }
-            }
-            add(title);
-            add(rank);
-            add(artists);
-            add(addOrRemove);
-        }
+    public LogInPanel getLogInPanel() {
+        return logInPanel;
     }
 
     /**
