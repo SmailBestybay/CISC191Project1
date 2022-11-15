@@ -14,6 +14,9 @@ public class Controller {
 
         JTextField userNameField = gui.getLogInPanel().getUserNameField();
         gui.getLogInPanel().getLoginButton().addActionListener(new LogInButtonListener(userNameField));
+        JLabel messageLabel = gui.getLogInPanel().getMessageLabel();
+        gui.getNavbar().getListUserButton().addActionListener(new ListUsersButtonListener(messageLabel));
+
     }
 
     static class LogInButtonListener implements ActionListener {
@@ -25,9 +28,27 @@ public class Controller {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Login button pressed!");
             currentUser = userDatabase.importUser(userNameField.getText());
             gui.updateBody(currentUser);
+        }
+    }
+
+    static class ListUsersButtonListener implements ActionListener {
+        JLabel messageLabel;
+
+        public ListUsersButtonListener(JLabel messageLabel) {
+            this.messageLabel = messageLabel;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String [] users = userDatabase.showUsers();
+            StringBuilder message = new StringBuilder("Existing users: ");
+            for(String user:users) {
+                message.append(user);
+                message.append(", ");
+            }
+            messageLabel.setText(message.toString());
         }
     }
 }

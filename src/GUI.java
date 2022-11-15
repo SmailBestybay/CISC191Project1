@@ -232,6 +232,10 @@ public class GUI extends JFrame {
             }
             pack();
         }
+
+        public JButton getListUserButton() {
+            return listUserButton;
+        }
     }
 
     /**
@@ -239,13 +243,7 @@ public class GUI extends JFrame {
      */
     class LogInPanel extends JPanel {
         private JLabel userNameFieldLabel;
-
-
-
         private JTextField userNameField;
-
-
-
         private JButton loginButton;
         private JButton registerButton;
         private JLabel messageLabel;
@@ -292,6 +290,11 @@ public class GUI extends JFrame {
         public JButton getLoginButton() {
             return loginButton;
         }
+
+        public JLabel getMessageLabel() {
+            return messageLabel;
+        }
+
     }
 
     /**
@@ -300,6 +303,14 @@ public class GUI extends JFrame {
      */
     public LogInPanel getLogInPanel() {
         return logInPanel;
+    }
+
+    /**
+     *
+     * @return navbar panel
+     */
+    public Navbar getNavbar() {
+        return navbar;
     }
 
     /**
