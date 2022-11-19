@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * GUI class, uses multiple nested inner classes to organise fields
@@ -263,10 +261,11 @@ public class GUI extends JFrame {
             userNameField.setMaximumSize(new Dimension(200, 26));
 
             loginButton = new JButton("Log in");
-            Controller.LogInListener logInListener = new Controller.LogInListener(userNameField);
-            loginButton.addActionListener(logInListener);
+            Controller.LogInOrRegisterListener logInOrRegisterListener = new Controller.LogInOrRegisterListener(userNameField);
+            loginButton.addActionListener(logInOrRegisterListener);
 
             registerButton = new JButton("Register");
+            registerButton.addActionListener(logInOrRegisterListener);
             messageLabel = new JLabel();
             messageLabel.setText("Welcome! Please Log in or Register");
 
