@@ -85,7 +85,7 @@ public class ConsoleUI {
     {
         System.out.println("---------------------------------------------------------");
         System.out.println("Here are the existing users:");
-        for(String user: userDatabase.showUsers())
+        for(String user: userDatabase.getUsers())
         {
             System.out.println(user);
         }

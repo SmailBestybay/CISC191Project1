@@ -20,7 +20,7 @@ public class userDatabase
 	 * display all existing users by reading sub folder names
 	 * @return list of users
 	 */
-	public static String[] showUsers()
+	public static String[] getUsers()
 	{
 		File file = new File("Users/");
 		return file.list();
