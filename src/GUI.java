@@ -13,6 +13,7 @@ public class GUI extends JFrame {
     private Navbar navbar;
     private LogInPanel logInPanel;
     private ContentPanel contentPanel;
+    private User currentUser = null;
 
     /**
      * GUI constructor
@@ -46,18 +47,17 @@ public class GUI extends JFrame {
 
     /**
      * update body panel
-     * @param user user data
      */
-    public void updateBody(User user) {
-
+    public void updateBody() {
+        User user = currentUser;
         if (user == null){
-            navbar.updateNavbar(null);
+            navbar.updateNavbar();
             body.remove(contentPanel);
             body.add(logInPanel, BorderLayout.CENTER);
         }
 
         if (user != null) {
-            navbar.updateNavbar(user);
+            navbar.updateNavbar();
             body.remove(logInPanel);
             contentPanel = new ContentPanel();
             body.add(contentPanel, BorderLayout.CENTER);
@@ -191,9 +191,9 @@ public class GUI extends JFrame {
 
             // logged out state components
             listUserButton = new JButton("Show Users");
-
-            Controller.ListUsersListener listener = new Controller.ListUsersListener();
-            listUserButton.addActionListener(listener);
+            // add listener
+            Controller.ListUsersListener listUsersListener = new Controller.ListUsersListener();
+            listUserButton.addActionListener(listUsersListener);
 
             // logged in state components
             favoriteSongsButton = new JButton("My Songs");
@@ -208,11 +208,11 @@ public class GUI extends JFrame {
 
         /**
          * Update navbar from logged in state to logged out state and vice versa.
-         * @param user current user data
          */
-        public void updateNavbar(User user){
+        public void updateNavbar(){
 
             Component horizontalStrut = Box.createHorizontalStrut(20);
+            User user = currentUser;
 
             // if logged out state, remove components
             if (user == null) {
@@ -261,7 +261,11 @@ public class GUI extends JFrame {
             userNameFieldLabel = new JLabel("User Name");
             userNameField = new JTextField(2);
             userNameField.setMaximumSize(new Dimension(200, 26));
+
             loginButton = new JButton("Log in");
+            Controller.LogInListener logInListener = new Controller.LogInListener(userNameField);
+            loginButton.addActionListener(logInListener);
+
             registerButton = new JButton("Register");
             messageLabel = new JLabel();
             messageLabel.setText("Welcome! Please Log in or Register");
@@ -292,10 +296,6 @@ public class GUI extends JFrame {
             return userNameField;
         }
 
-        public JButton getLoginButton() {
-            return loginButton;
-        }
-
         public JLabel getMessageLabel() {
             return messageLabel;
         }
@@ -316,6 +316,15 @@ public class GUI extends JFrame {
      */
     public Navbar getNavbar() {
         return navbar;
+    }
+
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     /**
