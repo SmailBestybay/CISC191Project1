@@ -120,19 +120,29 @@ public class GUI extends JFrame {
         class ItemsPanel extends JPanel {
 
             private ArrayList<SongItem> songItems;
+            private ArrayList<ArtistItem> artistItems;
             public ItemsPanel() {
                 super();
                 songItems = new ArrayList<>();
+                artistItems = new ArrayList<>();
                 this.setLayout(new GridLayout(0,1));
             }
 
-            public void displayItems(ArrayList<Song> songs, User user) {
+            public void displayItems(ArrayList<Song> songs, ArrayList<Artist> artists, User user) {
                 for (Component component: this.getComponents()) {
                     this.remove(component);
                 }
-                for (int i = 0; i < songs.size(); i++) {
-                    songItems.add(new SongItem(songs.get(i), user));
-                    this.add(songItems.get(i));
+                if (songs != null) {
+                    for (int i = 0; i < songs.size(); i++) {
+                        songItems.add(new SongItem(songs.get(i), user));
+                        this.add(songItems.get(i));
+                    }
+                }
+                if (artists != null) {
+                    for (int i = 0; i < artists.size(); i++) {
+                        artistItems.add(new ArtistItem(artists.get(i), user));
+                        this.add(artistItems.get(i));
+                    }
                 }
                 pack();
             }
@@ -167,6 +177,25 @@ public class GUI extends JFrame {
             add(rank);
             add(artists);
             add(addOrRemove);
+        }
+    }
+
+    class ArtistItem extends JPanel {
+        private JLabel name;
+        private JButton addOrRemove;
+
+        public ArtistItem(Artist artist, User user) {
+            this.name = new JLabel(artist.getName());
+            addOrRemove = new JButton("Add");
+
+            for (Artist userArtist: user.getArtists()) {
+                if(artist.equals(userArtist)) {
+                    addOrRemove.setText("Remove");
+                }
+            }
+            add(name);
+            add(addOrRemove);
+
         }
     }
 
@@ -347,5 +376,9 @@ public class GUI extends JFrame {
      */
     public void showMessage(String message) {
         this.logInPanel.getMessageLabel().setText(message);
+    }
+
+    public void updateContentPanel(ArrayList<Song> songs, ArrayList<Artist> artists) {
+        contentPanel.itemsPanel.displayItems(songs, artists, currentUser);
     }
 }

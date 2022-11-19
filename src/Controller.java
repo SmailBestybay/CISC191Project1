@@ -17,11 +17,16 @@ public class Controller {
     public static class NavbarListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            User user = view.getCurrentUser();
             if(e.getActionCommand().equals("Show Users")) {
                 view.showMessage(Arrays.toString(userDatabase.getUsers()));
             } else if (e.getActionCommand().equals("Log Out")) {
                 view.setCurrentUser(null);
                 view.updateBody();
+            } else if (e.getActionCommand().equals("My Songs")) {
+                view.updateContentPanel(user.getSongs(), null);
+            } else if (e.getActionCommand().equals("My Artists")) {
+                view.updateContentPanel(null, user.getArtists());
             }
 
 
