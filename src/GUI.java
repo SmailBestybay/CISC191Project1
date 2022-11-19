@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * GUI class, uses multiple nested inner classes to organise fields
@@ -190,6 +192,9 @@ public class GUI extends JFrame {
             // logged out state components
             listUserButton = new JButton("Show Users");
 
+            Controller.ListUsersListener listener = new Controller.ListUsersListener();
+            listUserButton.addActionListener(listener);
+
             // logged in state components
             favoriteSongsButton = new JButton("My Songs");
             favoriteArtistsButton = new JButton("My Artists");
@@ -319,5 +324,11 @@ public class GUI extends JFrame {
      */
     private static void centerWidget(JComponent component){
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
+    }
+
+    // Action triggered static methods
+
+    public void showUsers(String[] users) {
+        this.logInPanel.getMessageLabel().setText(Arrays.toString(users));
     }
 }
