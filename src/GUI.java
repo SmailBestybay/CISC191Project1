@@ -337,7 +337,7 @@ public class GUI extends JFrame {
 
     // Action triggered static methods
 
-    public void showUsers(String[] users) {
-        this.logInPanel.getMessageLabel().setText(Arrays.toString(users));
+    public void showMessage(String message) {
+        this.logInPanel.getMessageLabel().setText(message);
     }
 }

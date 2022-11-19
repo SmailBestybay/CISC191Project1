@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class Controller {
 
@@ -16,7 +17,7 @@ public class Controller {
     public static class ListUsersListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Controller.view.showUsers(userDatabase.getUsers());
+            view.showMessage(Arrays.toString(userDatabase.getUsers()));
         }
     }public static class LogInListener implements ActionListener {
         JTextField userNameField;
@@ -27,8 +28,7 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             User user = userDatabase.importUser(userNameField.getText());
             if (user == null) {
-//                GUI.logInFailed();
-                System.out.println("Log in failed");
+                view.showMessage("Log in failed. User not found");
             } else {
                 view.setCurrentUser(user);
                 view.updateBody();
