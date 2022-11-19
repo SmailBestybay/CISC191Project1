@@ -14,15 +14,22 @@ public class Controller {
     }
 
 
-    public static class ListUsersListener implements ActionListener {
+    public static class NavbarListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.showMessage(Arrays.toString(userDatabase.getUsers()));
+            if(e.getActionCommand().equals("Show Users")) {
+                view.showMessage(Arrays.toString(userDatabase.getUsers()));
+            } else if (e.getActionCommand().equals("Log Out")) {
+                view.setCurrentUser(null);
+                view.updateBody();
+            }
+
+
         }
     }
-    public static class LogInOrRegisterListener implements ActionListener {
+    public static class LogInPanelListener implements ActionListener {
         JTextField userNameField;
-        public LogInOrRegisterListener(JTextField userNameField) {
+        public LogInPanelListener(JTextField userNameField) {
             this.userNameField = userNameField;
         }
         @Override
@@ -37,8 +44,7 @@ public class Controller {
                     view.updateBody();
                 }
             }
-
-            if (e.getActionCommand().equals("Register")) {
+            else if (e.getActionCommand().equals("Register")) {
                 user = new User(userNameField.getText());
                 userDatabase.exportCSV(user);
                 view.showMessage("Registration successful");

@@ -181,6 +181,7 @@ public class GUI extends JFrame {
         private JButton favoriteArtistsButton;
         private JButton logOutButton;
         private JLabel currentUserLabel;
+        private Controller.NavbarListener navbarListener;
 
         public Navbar() {
             super();
@@ -190,13 +191,18 @@ public class GUI extends JFrame {
             // logged out state components
             listUserButton = new JButton("Show Users");
             // add listener
-            Controller.ListUsersListener listUsersListener = new Controller.ListUsersListener();
-            listUserButton.addActionListener(listUsersListener);
+            navbarListener = new Controller.NavbarListener();
+            listUserButton.addActionListener(navbarListener);
 
             // logged in state components
             favoriteSongsButton = new JButton("My Songs");
+            favoriteSongsButton.addActionListener(navbarListener);
+
             favoriteArtistsButton = new JButton("My Artists");
+            favoriteArtistsButton.addActionListener(navbarListener);
+
             logOutButton = new JButton("Log Out");
+            logOutButton.addActionListener(navbarListener);
 
 
             add(appName);
@@ -261,11 +267,11 @@ public class GUI extends JFrame {
             userNameField.setMaximumSize(new Dimension(200, 26));
 
             loginButton = new JButton("Log in");
-            Controller.LogInOrRegisterListener logInOrRegisterListener = new Controller.LogInOrRegisterListener(userNameField);
-            loginButton.addActionListener(logInOrRegisterListener);
+            Controller.LogInPanelListener logInPanelListener = new Controller.LogInPanelListener(userNameField);
+            loginButton.addActionListener(logInPanelListener);
 
             registerButton = new JButton("Register");
-            registerButton.addActionListener(logInOrRegisterListener);
+            registerButton.addActionListener(logInPanelListener);
             messageLabel = new JLabel();
             messageLabel.setText("Welcome! Please Log in or Register");
 
@@ -334,8 +340,11 @@ public class GUI extends JFrame {
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
-    // Action triggered static methods
 
+    /**
+     * Change message label to give user feedback
+     * @param message message for the user
+     */
     public void showMessage(String message) {
         this.logInPanel.getMessageLabel().setText(message);
     }
