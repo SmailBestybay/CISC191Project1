@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * GUI class, uses multiple nested inner classes to organise fields
@@ -52,6 +53,7 @@ public class GUI extends JFrame {
             navbar.updateNavbar();
             body.remove(contentPanel);
             body.add(logInPanel, BorderLayout.CENTER);
+            logInPanel.userNameField.setText("");
         }
 
         if (user != null) {
@@ -180,6 +182,9 @@ public class GUI extends JFrame {
         }
     }
 
+    /**
+     * Artist item inner class
+     */
     class ArtistItem extends JPanel {
         private JLabel name;
         private JButton addOrRemove;
@@ -249,10 +254,14 @@ public class GUI extends JFrame {
 
             // if logged out state, remove components
             if (user == null) {
-                for (int i = 2; i < getComponents().length; i++) {
-                    remove(i);
+                for (int i = 2; i < this.getComponents().length; i++) {
+                    this.remove(i);
                 }
                 add(listUserButton);
+                // remove components that are not getting removed by the loop.
+                // find out why....
+                remove(favoriteArtistsButton);
+                remove(currentUserLabel);
             }
 
             // if logged in, add components
@@ -371,7 +380,7 @@ public class GUI extends JFrame {
 
 
     /**
-     * Change message label to give user feedback
+     * Change message label to give feedback to user
      * @param message message for the user
      */
     public void showMessage(String message) {
