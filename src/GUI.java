@@ -108,6 +108,10 @@ public class GUI extends JFrame {
                 String[] searchOptions = {"Song", "Artist", "Mixed"};
                 searchMode = new JComboBox<>(searchOptions);
 
+                Controller.SearchPanelListener searchPanelListener;
+                searchPanelListener = new Controller.SearchPanelListener(searchField, searchMode);
+                searchButton.addActionListener(searchPanelListener);
+
                 add(searchLabel);
                 add(searchField);
                 add(searchButton);
@@ -131,9 +135,16 @@ public class GUI extends JFrame {
             }
 
             public void displayItems(ArrayList<Song> songs, ArrayList<Artist> artists, User user) {
-                for (Component component: this.getComponents()) {
-                    this.remove(component);
+                for (int i = getComponentCount()-1; i >= 0; i--) {
+                    this.remove(i);
+                    revalidate();
+                    repaint();
                 }
+
+                // clear lists from old query results
+                songItems.clear();
+                artistItems.clear();
+
                 if (songs != null) {
                     for (int i = 0; i < songs.size(); i++) {
                         songItems.add(new SongItem(songs.get(i), user));
@@ -146,6 +157,7 @@ public class GUI extends JFrame {
                         this.add(artistItems.get(i));
                     }
                 }
+                repaint();
                 pack();
             }
         }
@@ -254,14 +266,13 @@ public class GUI extends JFrame {
 
             // if logged out state, remove components
             if (user == null) {
-                for (int i = 2; i < this.getComponents().length; i++) {
+                // must remove components in the backwards order
+                // otherwise the index numbers get messed up
+                // as you are changing the object you are iterating over.
+                for (int i = getComponentCount()-1; i > 1; i--) {
                     this.remove(i);
                 }
                 add(listUserButton);
-                // remove components that are not getting removed by the loop.
-                // find out why....
-                remove(favoriteArtistsButton);
-                remove(currentUserLabel);
             }
 
             // if logged in, add components
@@ -278,10 +289,6 @@ public class GUI extends JFrame {
                 add(horizontalStrut);
             }
             pack();
-        }
-
-        public JButton getListUserButton() {
-            return listUserButton;
         }
     }
 

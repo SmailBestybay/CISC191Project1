@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Controller {
@@ -53,6 +54,42 @@ public class Controller {
                 user = new User(userNameField.getText());
                 userDatabase.exportCSV(user);
                 view.showMessage("Registration successful");
+            }
+        }
+    }
+
+    public static class SearchPanelListener implements ActionListener {
+
+        JTextField searchField;
+        JComboBox<String> searchMode;
+        public SearchPanelListener(JTextField searchField, JComboBox<String> searchMode) {
+            this.searchField = searchField;
+            this.searchMode = searchMode;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            ArrayList<Song> songs = null;
+            ArrayList<Artist> artists = null;
+            if (searchMode.getSelectedItem() != null) {
+                String selectedItem = (String) searchMode.getSelectedItem();
+
+                if (selectedItem.equals("Mixed")) {
+                    songs = db.searchSong(searchField.getText());
+                    artists = db.searchArtist(searchField.getText());
+                } else {
+                    if (selectedItem.equals("Song")) {
+                        songs = db.searchSong(searchField.getText());
+                        System.out.println(searchField.getText());
+                    }
+
+                    if (selectedItem.equals("Artist")) {
+                        artists = db.searchArtist(searchField.getText());
+                        System.out.println(searchField.getText());
+                    }
+                }
+
+                view.updateContentPanel(songs, artists);
+
             }
 
         }
