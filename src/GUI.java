@@ -72,7 +72,7 @@ public class GUI extends JFrame {
      * content panel inner class
      */
     class ContentPanel extends JPanel {
-        private ItemsPanel itemsPanel;
+        private final ItemsPanel itemsPanel;
 
         public ContentPanel(){
             super();
@@ -123,8 +123,8 @@ public class GUI extends JFrame {
          */
         class ItemsPanel extends JPanel {
 
-            private ArrayList<SongItem> songItems;
-            private ArrayList<ArtistItem> artistItems;
+            private final ArrayList<SongItem> songItems;
+            private final ArrayList<ArtistItem> artistItems;
             public ItemsPanel() {
                 super();
                 songItems = new ArrayList<>();
@@ -219,10 +219,10 @@ public class GUI extends JFrame {
      * Navbar inner class
      */
     class Navbar extends JPanel {
-        private JButton listUserButton;
-        private JButton favoriteSongsButton;
-        private JButton favoriteArtistsButton;
-        private JButton logOutButton;
+        private final JButton listUserButton;
+        private final JButton favoriteSongsButton;
+        private final JButton favoriteArtistsButton;
+        private final JButton logOutButton;
 
         public Navbar() {
             super();
@@ -292,8 +292,8 @@ public class GUI extends JFrame {
      * Login panel inner class
      */
     class LogInPanel extends JPanel {
-        private JTextField userNameField;
-        private JLabel messageLabel;
+        private final JTextField userNameField;
+        private final JLabel messageLabel;
 
         public LogInPanel() {
             super();
