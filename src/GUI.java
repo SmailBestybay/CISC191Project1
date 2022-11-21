@@ -348,32 +348,11 @@ public class GUI extends JFrame {
             add(Box.createRigidArea(new Dimension(0,100)));
         }
 
-        public JTextField getUserNameField() {
-            return userNameField;
-        }
-
         public JLabel getMessageLabel() {
             return messageLabel;
         }
 
     }
-
-    /**
-     *
-     * @return log in panel
-     */
-    public LogInPanel getLogInPanel() {
-        return logInPanel;
-    }
-
-    /**
-     *
-     * @return navbar panel
-     */
-    public Navbar getNavbar() {
-        return navbar;
-    }
-
 
     public User getCurrentUser() {
         return currentUser;
