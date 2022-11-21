@@ -291,7 +291,7 @@ public class GUI extends JFrame {
     /**
      * Login panel inner class
      */
-    class LogInPanel extends JPanel {
+    static class LogInPanel extends JPanel {
         private final JTextField userNameField;
         private final JLabel messageLabel;
 
