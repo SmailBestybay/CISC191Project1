@@ -16,8 +16,8 @@ public class User extends Person
 	}
 
 	/**
-	 * 
-	 * @param newSong
+	 *
+	 * @param newSong new song to be added
 	 * @return string status message
 	 */
 	public String addSong(Song newSong)
@@ -40,7 +40,7 @@ public class User extends Person
 	}
 	
 	/**
-	 * 
+	 *
 	 * @param newSong song to add
 	 * @return string status message
 	 */
