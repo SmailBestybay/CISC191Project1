@@ -8,7 +8,7 @@ import java.util.Objects;
 public abstract class Person
 {
 	//Fields
-	private String name;
+	private final String name;
 	
 	//Constructors
 	
