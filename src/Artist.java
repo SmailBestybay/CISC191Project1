@@ -23,12 +23,7 @@ public class Artist extends Person implements Comparable<Artist>
 	
 	public ArrayList<Song> getSongs()
 	{
-		ArrayList<Song> newSongs = new ArrayList<Song>();
-		for(Song song: songs)
-		{
-			newSongs.add(song);
-		}
-		return newSongs;
+		return new ArrayList<Song>(songs);
 	}
 
 	/**

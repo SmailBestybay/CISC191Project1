@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Controller {
 
@@ -20,7 +19,14 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             User user = view.getCurrentUser();
             if(e.getActionCommand().equals("Show Users")) {
-                view.showMessage(Arrays.toString(userDatabase.getUsers()));
+                StringBuilder message = new StringBuilder();
+                message.append("Existing Users: ");
+                String[] usersStringArr = userDatabase.getUsers();
+                for (String username: usersStringArr) {
+                    message.append(username);
+                    message.append(" ");
+                }
+                view.showMessage(message.toString());
             } else if (e.getActionCommand().equals("Log Out")) {
                 view.setCurrentUser(null);
                 view.updateBody();
@@ -40,7 +46,7 @@ public class Controller {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            User user = null;
+            User user;
             if (e.getActionCommand().equals("Log in")) {
                 user = userDatabase.importUser(userNameField.getText());
                 if (user == null) {
