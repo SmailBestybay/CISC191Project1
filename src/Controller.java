@@ -97,10 +97,10 @@ public class Controller {
      */
     public static class AddOrRemoveListener implements ActionListener {
 
-        private Song song;
-        private Artist artist;
-        private User user;
-        private JButton button;
+        private final Song song;
+        private final Artist artist;
+        private final User user;
+        private final JButton button;
 
         public AddOrRemoveListener(Song song, Artist artist, User user, JButton button) {
             this.song = song;

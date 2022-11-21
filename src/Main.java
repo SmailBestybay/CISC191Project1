@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.util.ArrayList;
-
 /**
  * @author Smail, Dre
  *
@@ -8,15 +5,12 @@ import java.util.ArrayList;
 public class Main
 {
 	/**
-	 * Controller
-	 *  
+	 * MVC implementation
 	 */
 	public static void main(String[] args)
 	{
 		SpotifyDatabase db = new SpotifyDatabase("dataBase.csv");
 		GUI view = new GUI();
-		Controller controller = new Controller(db, view);
-
-
+		new Controller(db, view);
 	}
 }
