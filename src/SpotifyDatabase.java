@@ -147,15 +147,6 @@ public class SpotifyDatabase
 		{
 			return null;
 		}
-		
-//		StringBuilder result = new StringBuilder();
-//		
-//		for(Song song: foundSongs)
-//		{
-//			result.append(song.toString());
-//			result.append("\n");
-//		}
-		
 		return foundSongs;
 	}
 	
@@ -174,15 +165,6 @@ public class SpotifyDatabase
 		{
 			return null;
 		}
-		
-//		StringBuilder result = new StringBuilder();
-//		
-//		for(Artist artist: foundArtist)
-//		{
-//			result.append(artist.toString());
-//			result.append("\n");
-//		}
-		
 		return foundArtist;
 	}
 	
