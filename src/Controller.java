@@ -87,10 +87,41 @@ public class Controller {
                         System.out.println(searchField.getText());
                     }
                 }
-
                 view.updateContentPanel(songs, artists);
-
             }
+        }
+    }
+
+    /**
+     * Add or Remove button listener, adds or removes item from user's favorites
+     */
+    public static class AddOrRemoveListener implements ActionListener {
+
+        private Song song;
+        private Artist artist;
+        private User user;
+        private JButton button;
+
+        public AddOrRemoveListener(Song song, Artist artist, User user, JButton button) {
+            this.song = song;
+            this.artist = artist;
+            this.user = user;
+            this.button = button;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String actionCommand = e.getActionCommand();
+            if (actionCommand.equals("Remove")) {
+                user.removeSong(song);
+                user.removeArtist(artist);
+                button.setText("Add");
+            } else {
+                user.addSong(song);
+                user.addArtist(artist);
+                button.setText("Remove");
+            }
+            userDatabase.exportCSV(user);
+            view.setCurrentUser(user);
 
         }
     }

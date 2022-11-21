@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * GUI class, uses multiple nested inner classes to organise fields
@@ -187,6 +186,9 @@ public class GUI extends JFrame {
                     addOrRemove.setText("Remove");
                 }
             }
+            Controller.AddOrRemoveListener listener;
+            listener = new Controller.AddOrRemoveListener(song, null, currentUser, addOrRemove);
+            addOrRemove.addActionListener(listener);
             add(title);
             add(rank);
             add(artists);
@@ -210,6 +212,10 @@ public class GUI extends JFrame {
                     addOrRemove.setText("Remove");
                 }
             }
+            Controller.AddOrRemoveListener listener;
+            listener = new Controller.AddOrRemoveListener(null, artist, currentUser, addOrRemove);
+            addOrRemove.addActionListener(listener);
+
             add(name);
             add(addOrRemove);
 
