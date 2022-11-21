@@ -45,9 +45,8 @@ public class ConsoleUI {
             for(int i = 0; i < message.length(); i++)
             {
                 System.out.print(message.charAt(i));
-//                Thread.sleep(10);
             }
-//            Thread.sleep(1500);
+            Thread.sleep(1500);
         }
     }
 
@@ -86,7 +85,7 @@ public class ConsoleUI {
     {
         System.out.println("---------------------------------------------------------");
         System.out.println("Here are the existing users:");
-        for(String user: userDatabase.showUsers())
+        for(String user: userDatabase.getUsers())
         {
             System.out.println(user);
         }
