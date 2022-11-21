@@ -72,15 +72,14 @@ public class GUI extends JFrame {
      * content panel inner class
      */
     class ContentPanel extends JPanel {
-        private SearchPanel searchPanel;
         private ItemsPanel itemsPanel;
-        private JScrollPane scrollPane;
+
         public ContentPanel(){
             super();
             setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-            searchPanel = new SearchPanel();
+            SearchPanel searchPanel = new SearchPanel();
             itemsPanel = new ItemsPanel();
-            scrollPane = new JScrollPane(itemsPanel);
+            JScrollPane scrollPane = new JScrollPane(itemsPanel);
 
             centerWidget(searchPanel);
             centerWidget(itemsPanel);
@@ -93,10 +92,6 @@ public class GUI extends JFrame {
          * search panel inner class
          */
         class SearchPanel extends JPanel {
-            private JLabel searchLabel;
-            private JTextField searchField;
-            private JButton searchButton;
-            private JComboBox<String> searchMode;
 
             /**
              * Search Panel constructor
@@ -105,11 +100,11 @@ public class GUI extends JFrame {
                 super();
 
                 // components
-                searchLabel = new JLabel("Search for a song or an artist");
-                searchField = new JTextField(10);
-                searchButton = new JButton("Search");
+                JLabel searchLabel = new JLabel("Search for a song or an artist");
+                JTextField searchField = new JTextField(10);
+                JButton searchButton = new JButton("Search");
                 String[] searchOptions = {"Song", "Artist", "Mixed"};
-                searchMode = new JComboBox<>(searchOptions);
+                JComboBox<String> searchMode = new JComboBox<>(searchOptions);
 
                 Controller.SearchPanelListener searchPanelListener;
                 searchPanelListener = new Controller.SearchPanelListener(searchField, searchMode);
@@ -170,21 +165,17 @@ public class GUI extends JFrame {
      * Song item inner class
      */
     class SongItem extends JPanel {
-        private JLabel title;
-        private JLabel rank;
-        private JLabel artists;
-        private JButton addOrRemove;
 
         public SongItem(Song song, User user) {
-            this.title = new JLabel(song.getTitle() + " | ");
-            this.rank = new JLabel("Rank: " + song.getRank() + " | ");
+            JLabel title = new JLabel(song.getTitle() + " | ");
+            JLabel rank = new JLabel("Rank: " + song.getRank() + " | ");
             StringBuilder artistsString = new StringBuilder();
             for(Artist artist: song.getArtists()) {
                 artistsString.append(artist.getName());
                 artistsString.append(" ");
             }
-            this.artists = new JLabel(artistsString.toString() + " | ");
-            addOrRemove = new JButton("Add");
+            JLabel artists = new JLabel(artistsString.toString() + " | ");
+            JButton addOrRemove = new JButton("Add");
             for (Song usersSong: user.getSongs()) {
                 if(song.equals(usersSong)) {
                     addOrRemove.setText("Remove");
@@ -204,12 +195,10 @@ public class GUI extends JFrame {
      * Artist item inner class
      */
     class ArtistItem extends JPanel {
-        private JLabel name;
-        private JButton addOrRemove;
 
         public ArtistItem(Artist artist, User user) {
-            this.name = new JLabel(artist.getName());
-            addOrRemove = new JButton("Add");
+            JLabel name = new JLabel(artist.getName());
+            JButton addOrRemove = new JButton("Add");
 
             for (Artist userArtist: user.getArtists()) {
                 if(artist.equals(userArtist)) {
@@ -230,24 +219,21 @@ public class GUI extends JFrame {
      * Navbar inner class
      */
     class Navbar extends JPanel {
-        // Navbar components
-        private JLabel appName;
         private JButton listUserButton;
         private JButton favoriteSongsButton;
         private JButton favoriteArtistsButton;
         private JButton logOutButton;
-        private JLabel currentUserLabel;
-        private Controller.NavbarListener navbarListener;
 
         public Navbar() {
             super();
-            appName = new JLabel(GUI.APP_NAME);
+            // Navbar components
+            JLabel appName = new JLabel(GUI.APP_NAME);
             appName.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
 
             // logged out state components
             listUserButton = new JButton("Show Users");
             // add listener
-            navbarListener = new Controller.NavbarListener();
+            Controller.NavbarListener navbarListener = new Controller.NavbarListener();
             listUserButton.addActionListener(navbarListener);
 
             // logged in state components
@@ -287,7 +273,7 @@ public class GUI extends JFrame {
 
             // if logged in, add components
             if (user != null) {
-                currentUserLabel = new JLabel(user.getName());
+                JLabel currentUserLabel = new JLabel(user.getName());
                 remove(listUserButton);
 
                 add(favoriteSongsButton);
@@ -306,10 +292,7 @@ public class GUI extends JFrame {
      * Login panel inner class
      */
     class LogInPanel extends JPanel {
-        private JLabel userNameFieldLabel;
         private JTextField userNameField;
-        private JButton loginButton;
-        private JButton registerButton;
         private JLabel messageLabel;
 
         public LogInPanel() {
@@ -317,15 +300,15 @@ public class GUI extends JFrame {
             this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
             // instantiate components of this panel
-            userNameFieldLabel = new JLabel("User Name");
+            JLabel userNameFieldLabel = new JLabel("User Name");
             userNameField = new JTextField(2);
             userNameField.setMaximumSize(new Dimension(200, 26));
 
-            loginButton = new JButton("Log in");
+            JButton loginButton = new JButton("Log in");
             Controller.LogInPanelListener logInPanelListener = new Controller.LogInPanelListener(userNameField);
             loginButton.addActionListener(logInPanelListener);
 
-            registerButton = new JButton("Register");
+            JButton registerButton = new JButton("Register");
             registerButton.addActionListener(logInPanelListener);
             messageLabel = new JLabel();
             messageLabel.setText(WELCOME_MESSAGE);
