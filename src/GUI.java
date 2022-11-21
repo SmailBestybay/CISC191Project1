@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class GUI extends JFrame {
     private static final String APP_NAME = "Spotify Super Lite!";
+    private static final String WELCOME_MESSAGE = "Welcome! Please Log in or Register";
     private JPanel body;
     private Navbar navbar;
     private LogInPanel logInPanel;
@@ -27,6 +28,7 @@ public class GUI extends JFrame {
         setSize(500,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
+        logInPanel.userNameField.requestFocusInWindow();
         setVisible(true);
     }
 
@@ -53,6 +55,8 @@ public class GUI extends JFrame {
             body.remove(contentPanel);
             body.add(logInPanel, BorderLayout.CENTER);
             logInPanel.userNameField.setText("");
+            logInPanel.messageLabel.setText(WELCOME_MESSAGE);
+            logInPanel.userNameField.requestFocusInWindow();
         }
 
         if (user != null) {
@@ -172,14 +176,14 @@ public class GUI extends JFrame {
         private JButton addOrRemove;
 
         public SongItem(Song song, User user) {
-            this.title = new JLabel(song.getTitle());
-            this.rank = new JLabel(song.getRank());
+            this.title = new JLabel(song.getTitle() + " | ");
+            this.rank = new JLabel("Rank: " + song.getRank() + " | ");
             StringBuilder artistsString = new StringBuilder();
             for(Artist artist: song.getArtists()) {
                 artistsString.append(artist.getName());
                 artistsString.append(" ");
             }
-            this.artists = new JLabel(artistsString.toString());
+            this.artists = new JLabel(artistsString.toString() + " | ");
             addOrRemove = new JButton("Add");
             for (Song usersSong: user.getSongs()) {
                 if(song.equals(usersSong)) {
@@ -324,7 +328,7 @@ public class GUI extends JFrame {
             registerButton = new JButton("Register");
             registerButton.addActionListener(logInPanelListener);
             messageLabel = new JLabel();
-            messageLabel.setText("Welcome! Please Log in or Register");
+            messageLabel.setText(WELCOME_MESSAGE);
 
             // center components
             centerWidget(userNameFieldLabel);

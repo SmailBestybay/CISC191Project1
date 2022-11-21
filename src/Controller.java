@@ -20,7 +20,14 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             User user = view.getCurrentUser();
             if(e.getActionCommand().equals("Show Users")) {
-                view.showMessage(Arrays.toString(userDatabase.getUsers()));
+                StringBuilder message = new StringBuilder();
+                message.append("Existing Users: ");
+                String[] usersStringArr = userDatabase.getUsers();
+                for (String username: usersStringArr) {
+                    message.append(username);
+                    message.append(" ");
+                }
+                view.showMessage(message.toString());
             } else if (e.getActionCommand().equals("Log Out")) {
                 view.setCurrentUser(null);
                 view.updateBody();
