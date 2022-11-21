@@ -174,7 +174,7 @@ public class GUI extends JFrame {
                 artistsString.append(artist.getName());
                 artistsString.append(" ");
             }
-            JLabel artists = new JLabel(artistsString.toString() + " | ");
+            JLabel artists = new JLabel(artistsString + " | ");
             JButton addOrRemove = new JButton("Add");
             for (Song usersSong: user.getSongs()) {
                 if(song.equals(usersSong)) {
