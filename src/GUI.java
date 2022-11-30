@@ -175,19 +175,19 @@ public class GUI extends JFrame {
                 artistsString.append(" ");
             }
             JLabel artists = new JLabel(artistsString + " | ");
-            JButton addOrRemove = new JButton("Add");
+            JButton addOrRemoveButton = new JButton("Add");
             for (Song usersSong: user.getSongs()) {
                 if(song.equals(usersSong)) {
-                    addOrRemove.setText("Remove");
+                    addOrRemoveButton.setText("Remove");
                 }
             }
             Controller.AddOrRemoveListener listener;
-            listener = new Controller.AddOrRemoveListener(song, null, currentUser, addOrRemove);
-            addOrRemove.addActionListener(listener);
+            listener = new Controller.AddOrRemoveListener(song, null, currentUser, addOrRemoveButton);
+            addOrRemoveButton.addActionListener(listener);
             add(title);
             add(rank);
             add(artists);
-            add(addOrRemove);
+            add(addOrRemoveButton);
         }
     }
 
@@ -198,19 +198,19 @@ public class GUI extends JFrame {
 
         public ArtistItem(Artist artist, User user) {
             JLabel name = new JLabel(artist.getName());
-            JButton addOrRemove = new JButton("Add");
+            JButton addOrRemoveButton = new JButton("Add");
 
             for (Artist userArtist: user.getArtists()) {
                 if(artist.equals(userArtist)) {
-                    addOrRemove.setText("Remove");
+                    addOrRemoveButton.setText("Remove");
                 }
             }
             Controller.AddOrRemoveListener listener;
-            listener = new Controller.AddOrRemoveListener(null, artist, currentUser, addOrRemove);
-            addOrRemove.addActionListener(listener);
+            listener = new Controller.AddOrRemoveListener(null, artist, currentUser, addOrRemoveButton);
+            addOrRemoveButton.addActionListener(listener);
 
             add(name);
-            add(addOrRemove);
+            add(addOrRemoveButton);
 
         }
     }
