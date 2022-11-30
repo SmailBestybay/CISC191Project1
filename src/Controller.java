@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Controller {
 
@@ -60,9 +61,17 @@ public class Controller {
                 }
             }
             else if (e.getActionCommand().equals("Register")) {
-                user = new User(userNameField.getText());
-                userDatabase.exportCSV(user);
-                view.showMessage("Registration successful");
+                String[] users = userDatabase.getUsers();
+                String name = userNameField.getText();
+                if(name.trim().equals("")) {
+                    view.showMessage("Registration failed: Name can not be blank.");
+                } else if (Arrays.asList(users).contains(name)) {
+                    view.showMessage("User already exists.");
+                } else {
+                    user = new User(name);
+                    userDatabase.exportCSV(user);
+                    view.showMessage("Registration successful");
+                }
             }
         }
     }
@@ -88,12 +97,10 @@ public class Controller {
                 } else {
                     if (selectedItem.equals("Song")) {
                         songs = model.searchSong(searchField.getText());
-                        System.out.println(searchField.getText());
                     }
 
                     if (selectedItem.equals("Artist")) {
                         artists = model.searchArtist(searchField.getText());
-                        System.out.println(searchField.getText());
                     }
                 }
                 view.updateContentPanel(songs, artists);
