@@ -119,7 +119,7 @@ public class GUI extends JFrame {
         }
 
         /**
-         * Items panel, responsible for displaying query results.
+         * Items panel, responsible for displaying search query results.
          */
         class ItemsPanel extends JPanel {
 
@@ -262,9 +262,6 @@ public class GUI extends JFrame {
 
             // if logged out state, remove components
             if (user == null) {
-                // must remove components in the backwards order
-                // otherwise the index numbers get messed up
-                // as you are changing the object you are iterating over.
                 for (int i = getComponentCount()-1; i > 1; i--) {
                     this.remove(i);
                 }

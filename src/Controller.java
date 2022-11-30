@@ -43,6 +43,11 @@ public class Controller {
 
         }
     }
+
+    /**
+     * Responsibilities: handle events from the log in panel
+     * Events: Log in, Register
+     */
     public static class LogInPanelListener implements ActionListener {
         JTextField userNameField;
         public LogInPanelListener(JTextField userNameField) {
@@ -63,6 +68,8 @@ public class Controller {
             else if (e.getActionCommand().equals("Register")) {
                 String[] users = userDatabase.getUsers();
                 String name = userNameField.getText();
+                // Validate the username before registration,
+                // Could have userDatabase validate as well.
                 if(name.trim().equals("")) {
                     view.showMessage("Registration failed: Name can not be blank.");
                 } else if (Arrays.asList(users).contains(name)) {
@@ -76,6 +83,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Responsibilities: handle events from the search panel
+     * Events: Search query with JComboBox and JTextField
+     */
     public static class SearchPanelListener implements ActionListener {
 
         JTextField searchField;
