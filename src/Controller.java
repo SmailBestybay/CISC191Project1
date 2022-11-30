@@ -5,15 +5,18 @@ import java.util.ArrayList;
 
 public class Controller {
 
-    private static SpotifyDatabase db;
+    private static SpotifyDatabase model;
     private static GUI view;
 
-    public Controller(SpotifyDatabase db, GUI view) {
-        Controller.db = db;
+    public Controller(SpotifyDatabase model, GUI view) {
+        Controller.model = model;
         Controller.view = view;
     }
 
-
+    /**
+     * Responsibilities: handle events from the navbar
+     * Events: Show Users, Log Out, My Songs, My Artists.
+     */
     public static class NavbarListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -80,16 +83,16 @@ public class Controller {
                 String selectedItem = (String) searchMode.getSelectedItem();
 
                 if (selectedItem.equals("Mixed")) {
-                    songs = db.searchSong(searchField.getText());
-                    artists = db.searchArtist(searchField.getText());
+                    songs = model.searchSong(searchField.getText());
+                    artists = model.searchArtist(searchField.getText());
                 } else {
                     if (selectedItem.equals("Song")) {
-                        songs = db.searchSong(searchField.getText());
+                        songs = model.searchSong(searchField.getText());
                         System.out.println(searchField.getText());
                     }
 
                     if (selectedItem.equals("Artist")) {
-                        artists = db.searchArtist(searchField.getText());
+                        artists = model.searchArtist(searchField.getText());
                         System.out.println(searchField.getText());
                     }
                 }
