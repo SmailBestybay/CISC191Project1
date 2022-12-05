@@ -25,6 +25,9 @@ public class GUI extends JFrame {
 
         add(body);
 
+        Thread appNameThread = new Thread(navbar);
+        appNameThread.start();
+
         setSize(500,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -218,16 +221,17 @@ public class GUI extends JFrame {
     /**
      * Navbar inner class
      */
-    class Navbar extends JPanel {
+    class Navbar extends JPanel implements Runnable {
         private final JButton listUserButton;
         private final JButton favoriteSongsButton;
         private final JButton favoriteArtistsButton;
         private final JButton logOutButton;
+        private final JLabel appName;
 
         public Navbar() {
             super();
             // Navbar components
-            JLabel appName = new JLabel(GUI.APP_NAME);
+            appName = new JLabel(GUI.APP_NAME);
             appName.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
 
             // logged out state components
@@ -282,6 +286,21 @@ public class GUI extends JFrame {
                 add(horizontalStrut);
             }
             pack();
+        }
+
+        @Override
+        public void run() {
+            int waitTime = 2000;
+            while (Thread.currentThread().isAlive()) {
+                try {
+                    appName.setText("        Wooo!           ");
+                    Thread.sleep(waitTime);
+                    appName.setText(APP_NAME);
+                    Thread.sleep(waitTime);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
