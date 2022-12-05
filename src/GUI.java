@@ -25,6 +25,7 @@ public class GUI extends JFrame {
 
         add(body);
 
+        // Banner toggle implementation
         Thread appNameThread = new Thread(navbar);
         appNameThread.start();
 
@@ -220,6 +221,7 @@ public class GUI extends JFrame {
 
     /**
      * Navbar inner class
+     * Uses multi threading to toggle banner logo
      */
     class Navbar extends JPanel implements Runnable {
         private final JButton listUserButton;
@@ -288,6 +290,10 @@ public class GUI extends JFrame {
             pack();
         }
 
+        /**
+         * Runnable implementation.
+         * Toggle logo name over time.
+         */
         @Override
         public void run() {
             int waitTime = 2000;
