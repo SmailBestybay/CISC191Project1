@@ -299,6 +299,7 @@ public class GUI extends JFrame {
             int waitTime = 2000;
             while (Thread.currentThread().isAlive()) {
                 try {
+                    // extra spaces are used to loosely match the size of the app name.
                     appName.setText("        Wooo!           ");
                     Thread.sleep(waitTime);
                     appName.setText(APP_NAME);
