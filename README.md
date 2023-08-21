@@ -1,4 +1,4 @@
-# CISC191Project1
+# CISC 191 Java Project
 ## Authors: Smile and Dre
 
 [Google sheets copy of top200GlobalCharts.cvs](https://docs.google.com/spreadsheets/d/1110xTVoU16TChIj_j7801I7vpYEnMfEyieP_SQpN1X8/edit?usp=sharing)
